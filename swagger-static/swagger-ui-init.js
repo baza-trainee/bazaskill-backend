@@ -442,30 +442,64 @@ window.onload = function() {
       "/api/v1/testimonials": {
         "post": {
           "operationId": "TestimonialsController_create",
+          "summary": "Create review",
           "parameters": [],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateTestimonialDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "name_ua": {
+                      "type": "string"
+                    },
+                    "name_en": {
+                      "type": "string"
+                    },
+                    "name_pl": {
+                      "type": "string"
+                    },
+                    "position": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    },
+                    "review_ua": {
+                      "type": "string"
+                    },
+                    "review_en": {
+                      "type": "string"
+                    },
+                    "review_pl": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file",
+                    "name_ua",
+                    "name_en",
+                    "name_pl",
+                    "position",
+                    "date",
+                    "review_ua",
+                    "review_en",
+                    "review_pl"
+                  ],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
           },
           "responses": {
             "201": {
-              "description": "create testimonial",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Testimonial"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
+              "description": ""
             }
           },
           "tags": [
@@ -552,6 +586,7 @@ window.onload = function() {
         },
         "patch": {
           "operationId": "TestimonialsController_update",
+          "summary": "Update review",
           "parameters": [
             {
               "name": "id",
@@ -564,37 +599,50 @@ window.onload = function() {
           ],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateTestimonialDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "name_ua": {
+                      "type": "string"
+                    },
+                    "name_en": {
+                      "type": "string"
+                    },
+                    "name_pl": {
+                      "type": "string"
+                    },
+                    "position": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    },
+                    "review_ua": {
+                      "type": "string"
+                    },
+                    "review_en": {
+                      "type": "string"
+                    },
+                    "review_pl": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
           },
           "responses": {
-            "201": {
-              "description": "update testimonial",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Testimonial"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
+            "200": {
+              "description": ""
             }
           },
           "tags": [
@@ -907,7 +955,7 @@ window.onload = function() {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateTestimonialDto"
+                  "$ref": "#/components/schemas/UpdateCounterDto"
                 }
               }
             }
@@ -1949,48 +1997,62 @@ window.onload = function() {
             "password"
           ]
         },
-        "CreateTestimonialDto": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "review": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name",
-            "review"
-          ]
-        },
         "Testimonial": {
           "type": "object",
           "properties": {
-            "name": {
+            "name_ua": {
               "type": "string",
-              "description": "Reviewer`s name"
+              "description": "Reviewer`s name in ukrainian"
             },
-            "review": {
+            "name_en": {
               "type": "string",
-              "description": "Review text"
+              "description": "Reviewer`s name in english"
+            },
+            "name_pl": {
+              "type": "string",
+              "description": "Reviewer`s name in english"
+            },
+            "position": {
+              "type": "string",
+              "description": "Reviewer`s position"
+            },
+            "date": {
+              "type": "string",
+              "description": "Date of review"
+            },
+            "image_url": {
+              "type": "string",
+              "description": "Image of reviewer"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "Cloudinary public id"
+            },
+            "review_ua": {
+              "type": "string",
+              "description": "Reviewer`s name  in polish"
+            },
+            "review_en": {
+              "type": "string",
+              "description": "Review text in english"
+            },
+            "review_pl": {
+              "type": "string",
+              "description": "Review text in polish"
             }
           },
           "required": [
-            "name",
-            "review"
+            "name_ua",
+            "name_en",
+            "name_pl",
+            "position",
+            "date",
+            "image_url",
+            "image_id",
+            "review_ua",
+            "review_en",
+            "review_pl"
           ]
-        },
-        "UpdateTestimonialDto": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "review": {
-              "type": "string"
-            }
-          }
         },
         "CreateCounterDto": {
           "type": "object",
@@ -2027,6 +2089,10 @@ window.onload = function() {
             "technologies",
             "libraries"
           ]
+        },
+        "UpdateCounterDto": {
+          "type": "object",
+          "properties": {}
         },
         "PostEntity": {
           "type": "object",

@@ -16,7 +16,6 @@ import { Counter } from './entities/counter.entity';
 import { CountersService } from './counters.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
-import { UpdateTestimonialDto } from 'src/testimonials/dto/update-testimonial.dto';
 
 @ApiTags('Counters')
 @Controller('counters')
@@ -78,7 +77,7 @@ export class CountersController {
 
   //update counter
   @Patch(':id')
-  @ApiBody({ type: UpdateTestimonialDto })
+  @ApiBody({ type: UpdateCounterDto })
   @ApiResponse({
     status: 200,
     description: 'update counters',

@@ -5,7 +5,7 @@ export class CreatePartnerDto {
   @ApiProperty()
   @IsString()
   name: string;
-  
+
   @ApiProperty()
   @IsString()
   partner_url: string;

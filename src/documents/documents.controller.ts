@@ -140,7 +140,6 @@ export class DocumentsController {
         url,
       );
     }
-    // return this.documentsService.update(+id, updateDocumentDto);
   }
 
   @Delete(':id')

@@ -17,8 +17,16 @@ export class TestimonialsService {
     private readonly testimonialsRepository: Repository<Testimonial>,
   ) {}
 
-  async create(createTestimonialDto: CreateTestimonialDto) {
-    await this.testimonialsRepository.save(createTestimonialDto);
+  async create(
+    image_id: string,
+    image_url: string,
+    createTestimonialDto: CreateTestimonialDto,
+  ) {
+    await this.testimonialsRepository.save({
+      ...createTestimonialDto,
+      image_id,
+      image_url,
+    });
   }
 
   async findAll() {
@@ -42,8 +50,7 @@ export class TestimonialsService {
       const testimonial = await this.testimonialsRepository.findOne({
         where: { id },
       });
-      if (!testimonial)
-        throw new NotFoundException('This testimonial not found');
+      if (!testimonial) throw new NotFoundException('This review not found');
       return testimonial;
     } catch (error) {
       throw new HttpException(
@@ -53,14 +60,23 @@ export class TestimonialsService {
     }
   }
 
-  async update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
+  async update(
+    id: number,
+    updateTestimonialDto: UpdateTestimonialDto,
+    image_id?: string,
+    image_url?: string,
+  ) {
     try {
       const testimonial = await this.testimonialsRepository.findOne({
         where: { id },
       });
       if (!testimonial) throw new NotFoundException('This review not found');
-      await this.testimonialsRepository.update(id, updateTestimonialDto);
-      return { success: true };
+      await this.testimonialsRepository.update(id, {
+        ...updateTestimonialDto,
+        image_id,
+        image_url,
+      });
+      return { message: 'review successfully updated', testimonial };
     } catch (error) {
       throw new HttpException(
         'Server Error:',
@@ -76,7 +92,7 @@ export class TestimonialsService {
       });
       if (!testimonial) throw new NotFoundException('This review not found');
       await this.testimonialsRepository.delete(id);
-      return { success: true };
+      return { message: 'review successfully deleted', testimonial };
     } catch (error) {
       throw new HttpException(
         'Server Error:',
