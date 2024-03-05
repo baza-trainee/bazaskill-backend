@@ -117,7 +117,7 @@ export class DocumentsController {
         },
         title: { type: 'string' },
       },
-      required: ['title'],
+      required: ['file'],
     },
   })
   @UseInterceptors(FileInterceptor('file'))
@@ -140,7 +140,7 @@ export class DocumentsController {
         url,
       );
     }
-    return this.documentsService.update(+id, updateDocumentDto);
+    // return this.documentsService.update(+id, updateDocumentDto);
   }
 
   @Delete(':id')
