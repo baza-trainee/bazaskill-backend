@@ -1757,7 +1757,7 @@ window.onload = function() {
                     }
                   },
                   "required": [
-                    "title"
+                    "file"
                   ],
                   "$ref": "#/components/schemas/"
                 }

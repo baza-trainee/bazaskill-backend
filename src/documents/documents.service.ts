@@ -45,8 +45,8 @@ export class DocumentsService {
   async update(
     id: number,
     updateDocumentDto: UpdateDocumentDto,
-    document_id?: string,
-    document_url?: string,
+    document_id: string,
+    document_url: string,
   ) {
     const pdf = await this.documentRepository.findOne({
       where: {
