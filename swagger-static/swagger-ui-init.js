@@ -1609,6 +1609,191 @@ window.onload = function() {
             }
           }
         }
+      },
+      "/api/v1/documents": {
+        "post": {
+          "operationId": "DocumentsController_create",
+          "summary": "Upload PDF document",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "description": "Upload a file",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file",
+                    "title"
+                  ],
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Documents"
+          ]
+        },
+        "get": {
+          "operationId": "DocumentsController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "get all documents",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Document"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Documents"
+          ]
+        }
+      },
+      "/api/v1/documents/{id}": {
+        "get": {
+          "operationId": "DocumentsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get  document by id",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Document"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Documents"
+          ]
+        },
+        "patch": {
+          "operationId": "DocumentsController_update",
+          "summary": "Update PDF document",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "description": "Upload a file",
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "title"
+                  ],
+                  "$ref": "#/components/schemas/"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Documents"
+          ]
+        },
+        "delete": {
+          "operationId": "DocumentsController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Documents"
+          ]
+        }
       }
     },
     "info": {
@@ -2002,6 +2187,28 @@ window.onload = function() {
               "$ref": "#/components/schemas/Specialization"
             }
           }
+        },
+        "Document": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Title of the document"
+            },
+            "document_url": {
+              "type": "string",
+              "description": "Url of the uploaded document"
+            },
+            "document_id": {
+              "type": "string",
+              "description": "Id of the uploaded document"
+            }
+          },
+          "required": [
+            "title",
+            "document_url",
+            "document_id"
+          ]
         }
       }
     }

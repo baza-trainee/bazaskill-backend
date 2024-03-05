@@ -20,6 +20,7 @@ import { PostsModule } from './posts/posts.module';
 import { StackModule } from './stack/stack.module';
 import { SpecializationModule } from './specialization/specialization.module';
 import { SpecializationStackModule } from './specialization-stack/specialization-stack.module';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { SpecializationStackModule } from './specialization-stack/specialization
     StackModule,
     SpecializationModule,
     SpecializationStackModule,
+    DocumentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
