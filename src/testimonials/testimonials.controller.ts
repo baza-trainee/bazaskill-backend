@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
@@ -18,7 +18,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { NotFoundResponse } from '../types';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Testimonial } from './entities/testimonial.entity';
 import { TestimonialsService } from './testimonials.service';
 import { CreateTestimonialDto } from './dto/create-testimonial.dto';
@@ -189,7 +189,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
     const res = this.testimonialsService.remove(+id);
     await this.cloudinaryService.deleteFile((await res).testimonial.image_id);
