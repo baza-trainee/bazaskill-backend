@@ -6,12 +6,12 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
   HttpCode,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { NotFoundResponse } from 'src/types';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Counter } from './entities/counter.entity';
 import { CountersService } from './counters.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
@@ -35,7 +35,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   create(@Body() createCounterDto: CreateCounterDto) {
     return this.countersService.create(createCounterDto);
   }
@@ -92,7 +92,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateCounterDto: UpdateCounterDto) {
     return this.countersService.update(+id, updateCounterDto);
   }
@@ -109,7 +109,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.countersService.remove(+id);
   }

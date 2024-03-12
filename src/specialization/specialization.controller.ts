@@ -1,4 +1,4 @@
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import {
   Controller,
@@ -8,7 +8,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { SpecializationService } from './specialization.service';
 import { CreateSpecializationDto } from './dto/create-specialization.dto';
@@ -30,7 +30,7 @@ export class SpecializationController {
     type: CreateSpecializationDto,
   })
   @Post()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
   }
@@ -101,7 +101,7 @@ export class SpecializationController {
     type: UpdateSpecializationDto,
   })
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateSpecializationDto: UpdateSpecializationDto,
@@ -120,7 +120,7 @@ export class SpecializationController {
     description: 'internal server error',
   })
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.specializationService.remove(+id);
   }

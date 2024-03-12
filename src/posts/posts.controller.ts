@@ -8,7 +8,7 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -27,7 +27,7 @@ import { NotFoundResponse } from 'src/types';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PostEntity } from './entities/post.entity';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -66,7 +66,7 @@ export class PostsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @UploadedFile() file: Express.Multer.File,
@@ -151,7 +151,7 @@ export class PostsController {
     description: 'internal server error',
   })
   @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: number,
     @Body() updatePostDto: UpdatePostDto,
@@ -177,7 +177,7 @@ export class PostsController {
   @ApiNotFoundResponse({
     description: 'Not Found',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
     const res = await this.postsService.remove(+id);
     await this.cloudinaryService.deleteFile(res.post.image_id);
