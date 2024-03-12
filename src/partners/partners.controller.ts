@@ -9,14 +9,14 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
 import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Partners')
 @Controller('partners')
@@ -46,7 +46,7 @@ export class PartnersController {
     },
   })
   @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async create(
     @UploadedFile() file: Express.Multer.File,
     @Body() createPartnerDto: CreatePartnerDto,
@@ -89,7 +89,7 @@ export class PartnersController {
     },
   })
   @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: number,
     @Body() updatePartnerDto: UpdatePartnerDto,
@@ -108,7 +108,7 @@ export class PartnersController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
     const res = await this.partnersService.remove(+id);
     await this.cloudinaryService.deleteFile(res.partner.public_cloudinary_id);
