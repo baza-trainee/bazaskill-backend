@@ -22,6 +22,7 @@ import { SpecializationModule } from './specialization/specialization.module';
 import { SpecializationStackModule } from './specialization-stack/specialization-stack.module';
 import { DocumentsModule } from './documents/documents.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { HrApplicationModule } from './hr_application/hr_application.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { ContactsModule } from './contacts/contacts.module';
     SpecializationStackModule,
     DocumentsModule,
     ContactsModule,
+    HrApplicationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,10 +12,9 @@ export class ContactsService {
     private readonly contactsRepository: Repository<Contacts>,
   ) {}
 
-  create(createContactDto: CreateContactDto) {
-    console.log(createContactDto);
-    return this.contactsRepository.save(createContactDto);
-    // return { message: 'contacts successfully added', contacts };
+  async create(createContactDto: CreateContactDto) {
+    const contacts = await this.contactsRepository.save(createContactDto);
+    return { message: 'contacts successfully added', contacts };
   }
 
   findAll() {
