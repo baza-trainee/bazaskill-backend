@@ -1953,6 +1953,117 @@ window.onload = function() {
             "Contacts"
           ]
         }
+      },
+      "/api/v1/hr-application": {
+        "post": {
+          "operationId": "HrApplicationController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateHrApplicationDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "HR Application"
+          ]
+        },
+        "get": {
+          "operationId": "HrApplicationController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "HR Application"
+          ]
+        }
+      },
+      "/api/v1/hr-application/{id}": {
+        "get": {
+          "operationId": "HrApplicationController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "HR Application"
+          ]
+        },
+        "patch": {
+          "operationId": "HrApplicationController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateHrApplicationDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "HR Application"
+          ]
+        },
+        "delete": {
+          "operationId": "HrApplicationController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "HR Application"
+          ]
+        }
       }
     },
     "info": {
@@ -2451,6 +2562,74 @@ window.onload = function() {
               "type": "string"
             },
             "instagram": {
+              "type": "string"
+            }
+          }
+        },
+        "CreateHrApplicationDto": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "specialization": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "first_name",
+            "last_name",
+            "phone",
+            "email",
+            "company",
+            "country",
+            "specialization",
+            "message"
+          ]
+        },
+        "UpdateHrApplicationDto": {
+          "type": "object",
+          "properties": {
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "specialization": {
+              "type": "string"
+            },
+            "message": {
               "type": "string"
             }
           }
