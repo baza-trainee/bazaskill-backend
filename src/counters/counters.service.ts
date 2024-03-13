@@ -66,11 +66,11 @@ export class CountersService {
 
   async remove(id: number) {
     try {
-      const review = await this.CounterRepository.findOne({
+      const counter = await this.CounterRepository.findOne({
         where: { id },
       });
       await this.CounterRepository.delete(id);
-      return { success: true };
+      return { success: true, counter };
     } catch (error) {
       throw new HttpException(
         'Server Error:',

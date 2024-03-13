@@ -1842,6 +1842,117 @@ window.onload = function() {
             "Documents"
           ]
         }
+      },
+      "/api/v1/contacts": {
+        "post": {
+          "operationId": "ContactsController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateContactDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Contacts"
+          ]
+        },
+        "get": {
+          "operationId": "ContactsController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Contacts"
+          ]
+        }
+      },
+      "/api/v1/contacts/{id}": {
+        "get": {
+          "operationId": "ContactsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Contacts"
+          ]
+        },
+        "patch": {
+          "operationId": "ContactsController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateContactDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Contacts"
+          ]
+        },
+        "delete": {
+          "operationId": "ContactsController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Contacts"
+          ]
+        }
       }
     },
     "info": {
@@ -2275,6 +2386,74 @@ window.onload = function() {
             "document_url",
             "document_id"
           ]
+        },
+        "CreateContactDto": {
+          "type": "object",
+          "properties": {
+            "phone_1": {
+              "type": "string"
+            },
+            "phone_2": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "telegram": {
+              "type": "string"
+            },
+            "linkedin": {
+              "type": "string"
+            },
+            "discord": {
+              "type": "string"
+            },
+            "facebook": {
+              "type": "string"
+            },
+            "instagram": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "phone_1",
+            "phone_2",
+            "email",
+            "telegram",
+            "linkedin",
+            "discord",
+            "facebook",
+            "instagram"
+          ]
+        },
+        "UpdateContactDto": {
+          "type": "object",
+          "properties": {
+            "phone_1": {
+              "type": "string"
+            },
+            "phone_2": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "telegram": {
+              "type": "string"
+            },
+            "linkedin": {
+              "type": "string"
+            },
+            "discord": {
+              "type": "string"
+            },
+            "facebook": {
+              "type": "string"
+            },
+            "instagram": {
+              "type": "string"
+            }
+          }
         }
       }
     }
