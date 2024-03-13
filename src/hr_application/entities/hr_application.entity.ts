@@ -1,5 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity({ name: 'HrApplication' })
 export class HrApplication {
@@ -23,11 +28,11 @@ export class HrApplication {
   email: string;
 
   @ApiProperty({ description: 'company of HR' })
-  @Column({ nullable: true })
+  @Column()
   company: string;
 
   @ApiProperty({ description: 'country of HR' })
-  @Column({ nullable: true })
+  @Column()
   country: string;
 
   @ApiProperty({ description: 'specializtion' })
@@ -37,4 +42,10 @@ export class HrApplication {
   @ApiProperty({ description: 'message' })
   @Column()
   message: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  created_at: Date;
 }

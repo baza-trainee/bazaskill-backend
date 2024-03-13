@@ -2064,6 +2064,117 @@ window.onload = function() {
             "HR Application"
           ]
         }
+      },
+      "/api/v1/partner-application": {
+        "post": {
+          "operationId": "PartnerApplicationController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePartnerApplicationDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Partner Application"
+          ]
+        },
+        "get": {
+          "operationId": "PartnerApplicationController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Partner Application"
+          ]
+        }
+      },
+      "/api/v1/partner-application/{id}": {
+        "get": {
+          "operationId": "PartnerApplicationController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Partner Application"
+          ]
+        },
+        "patch": {
+          "operationId": "PartnerApplicationController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePartnerApplicationDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Partner Application"
+          ]
+        },
+        "delete": {
+          "operationId": "PartnerApplicationController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          },
+          "tags": [
+            "Partner Application"
+          ]
+        }
       }
     },
     "info": {
@@ -2621,6 +2732,88 @@ window.onload = function() {
               "type": "string"
             },
             "company": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "specialization": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "CreatePartnerApplicationDto": {
+          "type": "object",
+          "properties": {
+            "company_name": {
+              "type": "string"
+            },
+            "company_url": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "occupation": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "specialization": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "company_name",
+            "company_url",
+            "phone",
+            "email",
+            "first_name",
+            "last_name",
+            "occupation",
+            "country",
+            "specialization",
+            "message"
+          ]
+        },
+        "UpdatePartnerApplicationDto": {
+          "type": "object",
+          "properties": {
+            "company_name": {
+              "type": "string"
+            },
+            "company_url": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "occupation": {
               "type": "string"
             },
             "country": {
