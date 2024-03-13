@@ -21,6 +21,7 @@ import { StackModule } from './stack/stack.module';
 import { SpecializationModule } from './specialization/specialization.module';
 import { SpecializationStackModule } from './specialization-stack/specialization-stack.module';
 import { DocumentsModule } from './documents/documents.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { DocumentsModule } from './documents/documents.module';
     SpecializationModule,
     SpecializationStackModule,
     DocumentsModule,
+    ContactsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
