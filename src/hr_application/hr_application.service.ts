@@ -18,7 +18,11 @@ export class HrApplicationService {
   }
 
   findAll() {
-    return this.hrApplicationRepository.find();
+    return this.hrApplicationRepository.find({
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   findOne(id: number) {

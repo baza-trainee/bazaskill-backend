@@ -20,7 +20,11 @@ export class PartnerApplicationService {
   }
 
   findAll() {
-    return this.partnerApplicationRepository.find();
+    return this.partnerApplicationRepository.find({
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 
   findOne(id: number) {
