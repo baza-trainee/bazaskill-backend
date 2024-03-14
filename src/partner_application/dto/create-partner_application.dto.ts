@@ -28,7 +28,7 @@ export class CreatePartnerApplicationDto {
 
   @ApiProperty()
   @IsString()
-  occupation: string;
+  position: string;
 
   @ApiProperty()
   @IsOptional()
@@ -36,7 +36,7 @@ export class CreatePartnerApplicationDto {
 
   @ApiProperty()
   @IsString()
-  specialization: string;
+  specialist: string;
 
   @ApiProperty()
   @IsString()
