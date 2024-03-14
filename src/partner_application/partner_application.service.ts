@@ -40,7 +40,7 @@ export class PartnerApplicationService {
     const partner = await this.partnerApplicationRepository.findOne({
       where: { id },
     });
-    if (partner) throw new NotFoundException('This.partner not found');
+    if (!partner) throw new NotFoundException('This.partner not found');
 
     const updatedHr = await this.partnerApplicationRepository.update(
       id,
@@ -53,7 +53,7 @@ export class PartnerApplicationService {
     const partner = await this.partnerApplicationRepository.findOne({
       where: { id },
     });
-    if (partner) throw new NotFoundException('This.partner not found');
+    if (!partner) throw new NotFoundException('This.partner not found');
     await this.partnerApplicationRepository.delete(id);
     return { message: 'application was successfully deleted' };
   }
