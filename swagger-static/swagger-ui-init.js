@@ -2766,13 +2766,13 @@ window.onload = function() {
             "last_name": {
               "type": "string"
             },
-            "occupation": {
+            "position": {
               "type": "string"
             },
             "country": {
               "type": "string"
             },
-            "specialization": {
+            "specialist": {
               "type": "string"
             },
             "message": {
@@ -2786,9 +2786,9 @@ window.onload = function() {
             "email",
             "first_name",
             "last_name",
-            "occupation",
+            "position",
             "country",
-            "specialization",
+            "specialist",
             "message"
           ]
         },
@@ -2813,13 +2813,13 @@ window.onload = function() {
             "last_name": {
               "type": "string"
             },
-            "occupation": {
+            "position": {
               "type": "string"
             },
             "country": {
               "type": "string"
             },
-            "specialization": {
+            "specialist": {
               "type": "string"
             },
             "message": {

@@ -37,7 +37,7 @@ export class PartnerApplication {
 
   @ApiProperty({ description: 'occupation' })
   @Column()
-  occupation: string;
+  position: string;
 
   @ApiProperty({ description: 'country' })
   @Column()
@@ -45,7 +45,7 @@ export class PartnerApplication {
 
   @ApiProperty({ description: 'specializtion' })
   @Column()
-  specialization: string;
+  specialist: string;
 
   @ApiProperty({ description: 'message' })
   @Column()
