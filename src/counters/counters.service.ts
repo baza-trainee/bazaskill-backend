@@ -19,6 +19,7 @@ export class CountersService {
 
   async create(createCounterDto: CreateCounterDto) {
     await this.CounterRepository.save(createCounterDto);
+    return { message: 'Counter successfully created' };
   }
 
   async findAll() {
@@ -50,12 +51,15 @@ export class CountersService {
 
   async update(id: number, updateCounterDto: UpdateCounterDto) {
     try {
-      const review = await this.CounterRepository.findOne({
+      const counter = await this.CounterRepository.findOne({
         where: { id },
       });
-      if (!review) throw new NotFoundException('This counter not found');
-      await this.CounterRepository.update(id, updateCounterDto);
-      return { success: true };
+      if (!counter) throw new NotFoundException('This counter not found');
+      const updatedCounter = await this.CounterRepository.update(
+        id,
+        updateCounterDto,
+      );
+      return { message: 'Counter successfully updated', updatedCounter };
     } catch (error) {
       throw new HttpException(
         'Server Error:',
@@ -69,8 +73,9 @@ export class CountersService {
       const counter = await this.CounterRepository.findOne({
         where: { id },
       });
+      if (!counter) throw new NotFoundException('This counter not found');
       await this.CounterRepository.delete(id);
-      return { success: true, counter };
+      return { message: 'Counter successfully deleted' };
     } catch (error) {
       throw new HttpException(
         'Server Error:',

@@ -2389,7 +2389,30 @@ window.onload = function() {
         },
         "CreateCounterDto": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "liveProject": {
+              "type": "number"
+            },
+            "members": {
+              "type": "number"
+            },
+            "employed": {
+              "type": "number"
+            },
+            "technologies": {
+              "type": "number"
+            },
+            "libraries": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "liveProject",
+            "members",
+            "employed",
+            "technologies",
+            "libraries"
+          ]
         },
         "Counter": {
           "type": "object",
@@ -2425,7 +2448,23 @@ window.onload = function() {
         },
         "UpdateCounterDto": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "liveProject": {
+              "type": "number"
+            },
+            "members": {
+              "type": "number"
+            },
+            "employed": {
+              "type": "number"
+            },
+            "technologies": {
+              "type": "number"
+            },
+            "libraries": {
+              "type": "number"
+            }
+          }
         },
         "PostEntity": {
           "type": "object",
