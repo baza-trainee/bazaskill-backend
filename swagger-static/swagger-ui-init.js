@@ -1044,22 +1044,10 @@ window.onload = function() {
                       "type": "string",
                       "format": "binary"
                     },
-                    "title_ua": {
+                    "title": {
                       "type": "string"
                     },
-                    "title_en": {
-                      "type": "string"
-                    },
-                    "title_pl": {
-                      "type": "string"
-                    },
-                    "text_ua": {
-                      "type": "string"
-                    },
-                    "text_en": {
-                      "type": "string"
-                    },
-                    "text_pl": {
+                    "text": {
                       "type": "string"
                     },
                     "link": {
@@ -1068,12 +1056,8 @@ window.onload = function() {
                   },
                   "required": [
                     "file",
-                    "title_ua",
-                    "title_en",
-                    "title_pl",
-                    "text_ua",
-                    "text_en",
-                    "text_pl",
+                    "title",
+                    "text",
                     "link"
                   ],
                   "$ref": "#/components/schemas/"
@@ -1198,22 +1182,10 @@ window.onload = function() {
                       "type": "string",
                       "format": "binary"
                     },
-                    "title_ua": {
+                    "title": {
                       "type": "string"
                     },
-                    "title_en": {
-                      "type": "string"
-                    },
-                    "title_pl": {
-                      "type": "string"
-                    },
-                    "text_ua": {
-                      "type": "string"
-                    },
-                    "text_en": {
-                      "type": "string"
-                    },
-                    "text_pl": {
+                    "text": {
                       "type": "string"
                     },
                     "link": {
@@ -1221,12 +1193,8 @@ window.onload = function() {
                     }
                   },
                   "required": [
-                    "title_ua",
-                    "title_en",
-                    "title_pl",
-                    "text_ua",
-                    "text_en",
-                    "text_pl",
+                    "title",
+                    "text",
                     "link"
                   ],
                   "$ref": "#/components/schemas/"
@@ -2509,29 +2477,13 @@ window.onload = function() {
         "PostEntity": {
           "type": "object",
           "properties": {
-            "title_ua": {
+            "title": {
               "type": "string",
               "description": "Title of the post in ukrainian"
             },
-            "title_en": {
-              "type": "string",
-              "description": "Title of the post in english"
-            },
-            "title_pl": {
-              "type": "string",
-              "description": "Title of the post in polish"
-            },
-            "text_ua": {
+            "text": {
               "type": "string",
               "description": "Content of the post in ukrainian"
-            },
-            "text_en": {
-              "type": "string",
-              "description": "Content of the post in english"
-            },
-            "text_pl": {
-              "type": "string",
-              "description": "Content of the post in polish"
             },
             "link": {
               "type": "string",
@@ -2547,12 +2499,8 @@ window.onload = function() {
             }
           },
           "required": [
-            "title_ua",
-            "title_en",
-            "title_pl",
-            "text_ua",
-            "text_en",
-            "text_pl",
+            "title",
+            "text",
             "link",
             "image_url",
             "image_id"

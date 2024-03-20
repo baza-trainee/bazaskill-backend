@@ -4,27 +4,11 @@ import { IsString, IsUrl } from 'class-validator';
 export class CreatePostDto {
   @ApiProperty()
   @IsString()
-  title_ua: string;
+  title: string;
 
   @ApiProperty()
   @IsString()
-  title_en: string;
-
-  @ApiProperty()
-  @IsString()
-  title_pl: string;
-
-  @ApiProperty()
-  @IsString()
-  text_ua: string;
-
-  @ApiProperty()
-  @IsString()
-  text_en: string;
-
-  @ApiProperty()
-  @IsString()
-  text_pl: string;
+  text: string;
 
   @ApiProperty()
   @IsUrl()
