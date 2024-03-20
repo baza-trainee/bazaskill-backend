@@ -39,7 +39,7 @@ export class CountersService {
       const counter = await this.CounterRepository.findOne({
         where: { id },
       });
-      if (counter) throw new NotFoundException('This counter is not found');
+      if (!counter) throw new NotFoundException('This counter is not found');
       return counter;
     } catch (error) {
       throw new HttpException(
