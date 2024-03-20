@@ -13,27 +13,11 @@ export class PostEntity {
 
   @ApiProperty({ description: 'Title of the post in ukrainian' })
   @Column()
-  title_ua: string;
-
-  @ApiProperty({ description: 'Title of the post in english' })
-  @Column()
-  title_en: string;
-
-  @ApiProperty({ description: 'Title of the post in polish' })
-  @Column()
-  title_pl: string;
+  title: string;
 
   @ApiProperty({ description: 'Content of the post in ukrainian' })
   @Column()
-  text_ua: string;
-
-  @ApiProperty({ description: 'Content of the post in english' })
-  @Column()
-  text_en: string;
-
-  @ApiProperty({ description: 'Content of the post in polish' })
-  @Column()
-  text_pl: string;
+  text: string;
 
   @ApiProperty({ description: 'Link to the Linkedin post' })
   @Column()
