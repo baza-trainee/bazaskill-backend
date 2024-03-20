@@ -11,13 +11,33 @@ export class PostEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ description: 'Title of the post' })
+  @ApiProperty({ description: 'Title of the post in ukrainian' })
   @Column()
-  title: string;
+  title_ua: string;
 
-  @ApiProperty({ description: 'Content of the post' })
+  @ApiProperty({ description: 'Title of the post in english' })
   @Column()
-  content: string;
+  title_en: string;
+
+  @ApiProperty({ description: 'Title of the post in polish' })
+  @Column()
+  title_pl: string;
+
+  @ApiProperty({ description: 'Content of the post in ukrainian' })
+  @Column()
+  text_ua: string;
+
+  @ApiProperty({ description: 'Content of the post in english' })
+  @Column()
+  text_en: string;
+
+  @ApiProperty({ description: 'Content of the post in polish' })
+  @Column()
+  text_pl: string;
+
+  @ApiProperty({ description: 'Link to the Linkedin post' })
+  @Column()
+  link: string;
 
   @ApiProperty({ description: 'Url of the image' })
   @Column()
@@ -27,6 +47,9 @@ export class PostEntity {
   @Column()
   image_id: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  created_at: Date;
 }

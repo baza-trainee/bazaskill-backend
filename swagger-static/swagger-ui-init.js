@@ -1044,17 +1044,37 @@ window.onload = function() {
                       "type": "string",
                       "format": "binary"
                     },
-                    "title": {
+                    "title_ua": {
                       "type": "string"
                     },
-                    "content": {
+                    "title_en": {
+                      "type": "string"
+                    },
+                    "title_pl": {
+                      "type": "string"
+                    },
+                    "text_ua": {
+                      "type": "string"
+                    },
+                    "text_en": {
+                      "type": "string"
+                    },
+                    "text_pl": {
+                      "type": "string"
+                    },
+                    "link": {
                       "type": "string"
                     }
                   },
                   "required": [
                     "file",
-                    "title",
-                    "content"
+                    "title_ua",
+                    "title_en",
+                    "title_pl",
+                    "text_ua",
+                    "text_en",
+                    "text_pl",
+                    "link"
                   ],
                   "$ref": "#/components/schemas/"
                 }
@@ -1178,16 +1198,36 @@ window.onload = function() {
                       "type": "string",
                       "format": "binary"
                     },
-                    "title": {
+                    "title_ua": {
                       "type": "string"
                     },
-                    "content": {
+                    "title_en": {
+                      "type": "string"
+                    },
+                    "title_pl": {
+                      "type": "string"
+                    },
+                    "text_ua": {
+                      "type": "string"
+                    },
+                    "text_en": {
+                      "type": "string"
+                    },
+                    "text_pl": {
+                      "type": "string"
+                    },
+                    "link": {
                       "type": "string"
                     }
                   },
                   "required": [
-                    "title",
-                    "content"
+                    "title_ua",
+                    "title_en",
+                    "title_pl",
+                    "text_ua",
+                    "text_en",
+                    "text_pl",
+                    "link"
                   ],
                   "$ref": "#/components/schemas/"
                 }
@@ -2469,13 +2509,33 @@ window.onload = function() {
         "PostEntity": {
           "type": "object",
           "properties": {
-            "title": {
+            "title_ua": {
               "type": "string",
-              "description": "Title of the post"
+              "description": "Title of the post in ukrainian"
             },
-            "content": {
+            "title_en": {
               "type": "string",
-              "description": "Content of the post"
+              "description": "Title of the post in english"
+            },
+            "title_pl": {
+              "type": "string",
+              "description": "Title of the post in polish"
+            },
+            "text_ua": {
+              "type": "string",
+              "description": "Content of the post in ukrainian"
+            },
+            "text_en": {
+              "type": "string",
+              "description": "Content of the post in english"
+            },
+            "text_pl": {
+              "type": "string",
+              "description": "Content of the post in polish"
+            },
+            "link": {
+              "type": "string",
+              "description": "Link to the Linkedin post"
             },
             "image_url": {
               "type": "string",
@@ -2487,8 +2547,13 @@ window.onload = function() {
             }
           },
           "required": [
-            "title",
-            "content",
+            "title_ua",
+            "title_en",
+            "title_pl",
+            "text_ua",
+            "text_en",
+            "text_pl",
+            "link",
             "image_url",
             "image_id"
           ]

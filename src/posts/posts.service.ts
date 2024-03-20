@@ -30,12 +30,12 @@ export class PostsService {
   }
 
   async findAll() {
-    const testimonials = await this.postsRepository.find({
+    const posts = await this.postsRepository.find({
       order: {
-        createdAt: 'DESC',
+        created_at: 'DESC',
       },
     });
-    return testimonials;
+    return posts;
   }
 
   async findOne(id: number) {
