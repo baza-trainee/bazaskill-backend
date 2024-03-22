@@ -155,12 +155,12 @@ export class PostsController {
   @UseInterceptors(FileInterceptor('file'))
   // @UseGuards(JwtAuthGuard)
   async update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updatePostDto: UpdatePostDto,
     @UploadedFile() file?: Express.Multer.File,
   ) {
     if (file) {
-      const { image_id } = await this.postsService.findOne(id);
+      const { image_id } = await this.postsService.findOne(+id);
       await this.cloudinaryService.deleteFile(image_id);
       const { public_id, url } = await this.cloudinaryService.uploadFile(
         file,
