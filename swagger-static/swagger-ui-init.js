@@ -2329,13 +2329,17 @@ window.onload = function() {
             "email": {
               "type": "string"
             },
-            "password": {
+            "old_password": {
+              "type": "string"
+            },
+            "new_password": {
               "type": "string"
             }
           },
           "required": [
             "email",
-            "password"
+            "old_password",
+            "new_password"
           ]
         },
         "Testimonial": {
