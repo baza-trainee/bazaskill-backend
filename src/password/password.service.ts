@@ -107,17 +107,15 @@ export class PasswordService {
         HttpStatus.NOT_FOUND,
       );
 
-    const hashedOldPassword = await argon2.hash(changePasswordDto.old_password);
-
     const isCorrectOldPassword = await argon2.verify(
-      hashedOldPassword,
       user.password,
+      changePasswordDto.old_password,
     );
 
     if (!isCorrectOldPassword)
       throw new HttpException(
         'Некоректний попередній пароль',
-        HttpStatus.NOT_FOUND,
+        HttpStatus.BAD_REQUEST,
       );
 
     const hashedNewPassword = await argon2.hash(changePasswordDto.new_password);
@@ -127,6 +125,8 @@ export class PasswordService {
     return {
       email: user.email,
       access_token: this.jwtService.sign({ id: user.id, email: user.email }),
+      message: 'Password successfully updated',
+      status: 200,
     };
   }
 }

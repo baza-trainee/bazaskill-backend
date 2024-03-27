@@ -439,7 +439,7 @@ window.onload = function() {
         }
       },
       "/api/v1/password/change": {
-        "post": {
+        "patch": {
           "operationId": "PasswordController_changePassword",
           "parameters": [],
           "requestBody": {
