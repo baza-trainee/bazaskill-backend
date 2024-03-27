@@ -85,7 +85,50 @@ window.onload = function() {
           },
           "responses": {
             "201": {
-              "description": "get all reviews",
+              "description": "user created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/IUser"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "User"
+          ]
+        }
+      },
+      "/api/v1/user/{id}": {
+        "patch": {
+          "operationId": "UserController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "user successfully updated",
               "content": {
                 "application/json": {
                   "schema": {
@@ -2208,11 +2251,15 @@ window.onload = function() {
             },
             "password": {
               "type": "string"
+            },
+            "role": {
+              "type": "string"
             }
           },
           "required": [
             "email",
-            "password"
+            "password",
+            "role"
           ]
         },
         "IUser": {
@@ -2237,6 +2284,20 @@ window.onload = function() {
             "role",
             "access_token"
           ]
+        },
+        "UpdateUserDto": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          }
         },
         "Gallery": {
           "type": "object",

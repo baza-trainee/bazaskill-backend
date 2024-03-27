@@ -57,7 +57,8 @@ export class UserService {
         'Немає акаунту з цією адресою',
         HttpStatus.NOT_FOUND,
       );
-    return this.userRepository.update(id, updateUserDto);
+    await this.userRepository.update(id, updateUserDto);
+    return { message: 'user successfully updated', status: 200 };
   }
 
   async updatePassword(
