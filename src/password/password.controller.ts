@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Patch } from '@nestjs/common';
 import { PasswordService } from './password.service';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResetPasswordDto } from './dto/reset-password.dto';
@@ -40,7 +40,7 @@ export class PasswordController {
   }
 
   //change password
-  @Post('change')
+  @Patch('change')
   @ApiBody({ type: ChangePasswordDto })
   @ApiResponse({ status: 201, description: 'change password', type: IUser })
   @ApiResponse({
