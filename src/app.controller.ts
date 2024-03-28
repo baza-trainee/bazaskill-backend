@@ -3,8 +3,8 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from './user/dto/create-user.dto';
 import { IUser } from './types';
+import { LoginUserDto } from './user/dto/login-user.dto';
 
 @ApiTags('Auth')
 @Controller()
@@ -16,8 +16,8 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  @ApiBody({ type: CreateUserDto })
-  @ApiResponse({ status: 201, description: 'get all reviews', type: IUser })
+  @ApiBody({ type: LoginUserDto })
+  @ApiResponse({ status: 201, description: 'user signed in', type: IUser })
   @ApiResponse({
     status: 500,
     description: 'internal server error',
@@ -28,7 +28,7 @@ export class AppController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  @ApiResponse({ status: 201, description: 'get all reviews', type: IUser })
+  @ApiResponse({ status: 201, description: 'get user profile', type: IUser })
   @ApiResponse({
     status: 500,
     description: 'internal server error',

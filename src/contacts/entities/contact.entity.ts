@@ -14,9 +14,13 @@ export class Contacts {
   @Column()
   phone_2: string;
 
-  @ApiProperty({ description: 'email address' })
+  @ApiProperty({ description: 'first email address' })
   @Column()
-  email: string;
+  email_1: string;
+
+  @ApiProperty({ description: 'second email address' })
+  @Column()
+  email_2: string;
 
   @ApiProperty({ description: 'link to telegram' })
   @Column()

@@ -12,7 +12,11 @@ export class CreateContactDto {
 
   @ApiProperty()
   @IsString()
-  email: string;
+  email_1: string;
+
+  @ApiProperty()
+  @IsString()
+  email_2: string;
 
   @ApiProperty()
   @IsString()
