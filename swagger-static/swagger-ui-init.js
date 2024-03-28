@@ -20,14 +20,14 @@ window.onload = function() {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateUserDto"
+                  "$ref": "#/components/schemas/LoginUserDto"
                 }
               }
             }
           },
           "responses": {
             "201": {
-              "description": "get all reviews",
+              "description": "user signed in",
               "content": {
                 "application/json": {
                   "schema": {
@@ -51,7 +51,7 @@ window.onload = function() {
           "parameters": [],
           "responses": {
             "201": {
-              "description": "get all reviews",
+              "description": "get user profile",
               "content": {
                 "application/json": {
                   "schema": {
@@ -2243,7 +2243,7 @@ window.onload = function() {
     "servers": [],
     "components": {
       "schemas": {
-        "CreateUserDto": {
+        "LoginUserDto": {
           "type": "object",
           "properties": {
             "email": {
@@ -2251,15 +2251,11 @@ window.onload = function() {
             },
             "password": {
               "type": "string"
-            },
-            "role": {
-              "type": "string"
             }
           },
           "required": [
             "email",
-            "password",
-            "role"
+            "password"
           ]
         },
         "IUser": {
@@ -2283,6 +2279,25 @@ window.onload = function() {
             "email",
             "role",
             "access_token"
+          ]
+        },
+        "CreateUserDto": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "password",
+            "role"
           ]
         },
         "UpdateUserDto": {
@@ -2735,7 +2750,10 @@ window.onload = function() {
             "phone_2": {
               "type": "string"
             },
-            "email": {
+            "email_1": {
+              "type": "string"
+            },
+            "email_2": {
               "type": "string"
             },
             "telegram": {
@@ -2757,7 +2775,8 @@ window.onload = function() {
           "required": [
             "phone_1",
             "phone_2",
-            "email",
+            "email_1",
+            "email_2",
             "telegram",
             "linkedin",
             "discord",
@@ -2774,7 +2793,10 @@ window.onload = function() {
             "phone_2": {
               "type": "string"
             },
-            "email": {
+            "email_1": {
+              "type": "string"
+            },
+            "email_2": {
               "type": "string"
             },
             "telegram": {
