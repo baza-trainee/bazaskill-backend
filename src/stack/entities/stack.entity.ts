@@ -1,3 +1,4 @@
+import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { ApiProperty } from "@nestjs/swagger";
 import { SpecializationStack } from "src/specialization-stack/entities/specialization-stack.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -13,4 +14,7 @@ export class Stack {
     
     @OneToMany(()=> SpecializationStack, (specialization)=> specialization.stack_id)
     stack_specialization_id: SpecializationStack[]
+
+    @OneToMany(()=> CandidateStack, (candidate)=> candidate.stack_id)
+    stack_candidate_id: CandidateStack[]
 }

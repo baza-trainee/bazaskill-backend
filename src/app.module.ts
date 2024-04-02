@@ -24,6 +24,11 @@ import { DocumentsModule } from './documents/documents.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { HrApplicationModule } from './hr_application/hr_application.module';
 import { PartnerApplicationModule } from './partner_application/partner_application.module';
+import { CandidatesModule } from './candidates/candidates.module';
+import { CandidateLanguagesModule } from './candidate_languages/candidate_languages.module';
+import { CandidateStackModule } from './candidate_stack/candidate_stack.module';
+import { CandidateGraduateModule } from './candidate_graduate/candidate_graduate.module';
+import { CandidateCourcesModule } from './candidate_cources/candidate_cources.module';
 
 @Module({
   imports: [
@@ -74,6 +79,11 @@ import { PartnerApplicationModule } from './partner_application/partner_applicat
     ContactsModule,
     HrApplicationModule,
     PartnerApplicationModule,
+    CandidatesModule,
+    CandidateLanguagesModule,
+    CandidateStackModule,
+    CandidateGraduateModule,
+    CandidateCourcesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

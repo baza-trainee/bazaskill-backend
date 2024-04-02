@@ -1,0 +1,82 @@
+import { CandidateCource } from './../../candidate_cources/entities/candidate_cource.entity';
+import { Specialization } from 'src/specialization/entities/specialization.entity';
+import { CandidateLanguage } from "src/candidate_languages/entities/candidate_language.entity";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
+import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+
+@Entity('candidate')
+export class Candidate {
+    @PrimaryGeneratedColumn()
+    id: number
+
+    @Column()
+    name_ua: string
+
+    @Column()
+    surname_ua: string
+
+    @Column()
+    name: string
+
+    @Column()
+    surname: string
+
+    @Column()
+    country: string
+
+    @Column()
+    city: string
+
+    @Column()
+    phone: string
+
+    @Column()
+    email: string
+
+    @Column()
+    linkedin: string
+
+    @Column()
+    discord: string
+
+    @Column()
+    telegram: string
+
+    @OneToMany(() => CandidateLanguage, (language) => language.candidate_id)
+    candidate_language: CandidateLanguage[]
+
+    @Column()
+    work_format: string
+
+    @Column()
+    sallary_form: string
+
+    @Column()
+    sallary_to: string
+
+    //need to implement manyToOne with entity specialization
+    @OneToOne(() => Specialization)
+    @JoinColumn()
+    specialization: Specialization
+
+    @Column()
+    cv: string
+
+    //need to implement oneToMany with entity candidate_stack
+    @OneToMany(() => CandidateStack, (stack) => stack.candidate_id)
+    stack: CandidateStack[]
+
+
+    //need to implement oneToMany with entity candidate_graduate and entity graduate
+    @OneToMany(() => CandidateGraduate, (graduate)=> graduate.candidate_id )
+    gradaute: CandidateGraduate[]
+
+    //need to implement oneToMany with entity candidate_cources and entity cources
+    @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
+    cources: CandidateCource[]
+
+    // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
+    // @Column()
+    // baza_experience: string[]
+}
