@@ -4,6 +4,7 @@ import { CandidateLanguage } from "src/candidate_languages/entities/candidate_la
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
 
 @Entity('candidate')
 export class Candidate {
@@ -77,6 +78,6 @@ export class Candidate {
     cources: CandidateCource[]
 
     // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
-    // @Column()
-    // baza_experience: string[]
+    @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
+    baza_experience: BazaExperience[]
 }

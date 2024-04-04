@@ -29,6 +29,7 @@ import { CandidateLanguagesModule } from './candidate_languages/candidate_langua
 import { CandidateStackModule } from './candidate_stack/candidate_stack.module';
 import { CandidateGraduateModule } from './candidate_graduate/candidate_graduate.module';
 import { CandidateCourcesModule } from './candidate_cources/candidate_cources.module';
+import { BazaExperienceModule } from './baza_experience/baza_experience.module';
 
 @Module({
   imports: [
@@ -84,6 +85,7 @@ import { CandidateCourcesModule } from './candidate_cources/candidate_cources.mo
     CandidateStackModule,
     CandidateGraduateModule,
     CandidateCourcesModule,
+    BazaExperienceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
