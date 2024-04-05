@@ -1,4 +1,4 @@
-// import { CandidateCource } from './../../candidate_cources/entities/candidate_cource.entity';
+import { CandidateCource } from './../../candidate_cources/entities/candidate_cource.entity';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import { CandidateLanguage } from "src/candidate_languages/entities/candidate_language.entity";
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
@@ -74,8 +74,8 @@ export class Candidate {
     gradaute: CandidateGraduate[]
 
     // //need to implement oneToMany with entity candidate_cources and entity cources
-    // @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
-    // cources: CandidateCource[]
+    @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
+    cources: CandidateCource[]
 
     // // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
     // @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
