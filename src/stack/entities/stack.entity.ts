@@ -14,7 +14,4 @@ export class Stack {
     
     @OneToMany(()=> SpecializationStack, (specialization)=> specialization.stack_id)
     stack_specialization_id: SpecializationStack[]
-
-    // @OneToMany(()=> CandidateStack, (candidate)=> candidate.stack_id)
-    // stack_candidate_id: CandidateStack[]
 }
