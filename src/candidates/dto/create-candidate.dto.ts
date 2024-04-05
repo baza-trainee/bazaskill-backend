@@ -3,6 +3,7 @@ import { Stack } from 'src/stack/entities/stack.entity';
 import { IsArray, IsNumber, IsString } from "class-validator";
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
+import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 
 export class CreateCandidateDto {
     @IsString()
@@ -58,14 +59,7 @@ export class CreateCandidateDto {
     stack: CandidateStack[]
 
     // @IsArray()
-    // graduate: Array<{
-    //     unversity: string,
-    //     graduate_sertificate: string,
-    //     graduate_start: string,
-    //     graduate_end: string,
-    //     unversity_grade: string,
-    //     unversity_specialization: string
-    // }>
+    graduate: CandidateGraduate[]
 
     // @IsArray()
     // cources: Array<{

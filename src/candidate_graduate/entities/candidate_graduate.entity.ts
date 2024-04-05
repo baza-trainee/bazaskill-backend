@@ -12,7 +12,7 @@ export class CandidateGraduate {
     @Column()
     university_specialization: string;
 
-    @Column()
+    @Column() 
     university_grade: string
 
     @Column()
@@ -21,10 +21,10 @@ export class CandidateGraduate {
     @Column()
     graduate_end: string
 
-    @Column()
+    @Column() 
     graduate_sertificate: string
 
-    @ManyToOne(()=> Candidate, (candidate)=> candidate.gradaute)
+    @ManyToOne(()=> Candidate, (candidate)=> candidate.gradaute, {onDelete: "CASCADE"})
     @JoinColumn({name: 'candidate_id'})
     candidate_id: Candidate
 }

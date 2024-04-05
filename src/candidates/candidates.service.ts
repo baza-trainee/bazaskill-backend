@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { Stack } from 'src/stack/entities/stack.entity';
-// import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 
 @Injectable()
 export class CandidatesService {
@@ -16,12 +16,15 @@ export class CandidatesService {
     private readonly candidateRepository: Repository<Candidate>,
     @InjectRepository(CandidateLanguage)
     private readonly candidateLanguageRepository: Repository<CandidateLanguage>,
-    @InjectRepository(CandidateStack)
+    @InjectRepository(CandidateStack) 
     private readonly candidateStackRepository: Repository<CandidateStack>,
+    @InjectRepository(CandidateGraduate)
+    private readonly candidateGraduateRepository: Repository<CandidateGraduate>,
   ){}
   async create(createCandidateDto: CreateCandidateDto) { 
-    const {candidate_language, stack} = createCandidateDto
+    const {candidate_language, stack, graduate} = createCandidateDto
     const candidate = await this.candidateRepository.save(createCandidateDto);
+    
     candidate_language.forEach(async (item)=>{
       await this.candidateLanguageRepository.save({...item, candidate_id: candidate})
     })
@@ -29,7 +32,13 @@ export class CandidatesService {
     stack.forEach(async (item)=> {
       await this.candidateStackRepository.save({stack: item, candidate_id: candidate}) 
     }) 
-    console.log(candidate_language) 
+
+    graduate.forEach(async (item)=> {
+      await this.candidateGraduateRepository.save({...item, candidate_id: candidate}) 
+    }) 
+
+    
+    console.log(graduate) 
     return candidate  
   }
  
@@ -40,7 +49,8 @@ export class CandidatesService {
         candidate_language: true,
         stack: {
           stack: true
-        }
+        },
+        gradaute: true
       },
     });
   }
