@@ -7,8 +7,9 @@ import { CandidateStack } from './entities/candidate_stack.entity';
 import { Stack } from 'src/stack/entities/stack.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Candidate, CandidateStack, Stack])],
+  imports: [TypeOrmModule.forFeature([CandidateStack])],
   controllers: [CandidateStackController],
   providers: [CandidateStackService],
-})
-export class CandidateStackModule {}
+})  
+export class CandidateStackModule {} 
+ 

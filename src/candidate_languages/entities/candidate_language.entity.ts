@@ -12,7 +12,7 @@ export class CandidateLanguage {
     @Column()
     level: string
 
-    @ManyToOne(()=> Candidate, (candidate)=> candidate.candidate_language)
+    @ManyToOne(()=> Candidate, (candidate)=> candidate.candidate_language, {onDelete: 'CASCADE'})
     @JoinColumn({name: 'candidate_id'})
-    candidate_id: number
+    candidate_id: Candidate 
 }

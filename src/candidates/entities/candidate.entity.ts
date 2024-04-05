@@ -1,10 +1,11 @@
-import { CandidateCource } from './../../candidate_cources/entities/candidate_cource.entity';
+// import { CandidateCource } from './../../candidate_cources/entities/candidate_cource.entity';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import { CandidateLanguage } from "src/candidate_languages/entities/candidate_language.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
-import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
-import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
+// import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+// import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+
 
 @Entity('candidate')
 export class Candidate {
@@ -56,28 +57,27 @@ export class Candidate {
     @Column()
     sallary_to: string
 
-    //need to implement manyToOne with entity specialization
-    @OneToOne(() => Specialization)
+    // //need to implement manyToOne with entity specialization
+    @ManyToOne(() => Specialization)
     @JoinColumn()
     specialization: Specialization
 
     @Column()
     cv: string
-
     //need to implement oneToMany with entity candidate_stack
     @OneToMany(() => CandidateStack, (stack) => stack.candidate_id)
     stack: CandidateStack[]
 
 
-    //need to implement oneToMany with entity candidate_graduate and entity graduate
-    @OneToMany(() => CandidateGraduate, (graduate)=> graduate.candidate_id )
-    gradaute: CandidateGraduate[]
+    // //need to implement oneToMany with entity candidate_graduate and entity graduate
+    // @OneToMany(() => CandidateGraduate, (graduate)=> graduate.candidate_id )
+    // gradaute: CandidateGraduate[]
 
-    //need to implement oneToMany with entity candidate_cources and entity cources
-    @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
-    cources: CandidateCource[]
+    // //need to implement oneToMany with entity candidate_cources and entity cources
+    // @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
+    // cources: CandidateCource[]
 
-    // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
-    @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
-    baza_experience: BazaExperience[]
+    // // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
+    // @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
+    // baza_experience: BazaExperience[]
 }

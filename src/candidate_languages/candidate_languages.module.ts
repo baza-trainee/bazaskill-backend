@@ -6,7 +6,7 @@ import { Candidate } from 'src/candidates/entities/candidate.entity';
 import { CandidateLanguage } from './entities/candidate_language.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Candidate, CandidateLanguage])],
+  imports: [TypeOrmModule.forFeature([CandidateLanguage])],
   controllers: [CandidateLanguagesController],
   providers: [CandidateLanguagesService],
 })

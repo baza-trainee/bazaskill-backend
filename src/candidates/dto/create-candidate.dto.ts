@@ -1,5 +1,8 @@
+import { Specialization } from 'src/specialization/entities/specialization.entity';
 import { Stack } from 'src/stack/entities/stack.entity';
 import { IsArray, IsNumber, IsString } from "class-validator";
+import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
+import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 
 export class CreateCandidateDto {
     @IsString()
@@ -33,10 +36,9 @@ export class CreateCandidateDto {
     discord: string
 
     @IsString()
-    telegram: string
-
-    @IsArray()
-    candidate_language: Array<{ language: string, level: string }>
+    telegram: string 
+  
+    candidate_language: CandidateLanguage[]
 
     @IsString()
     work_format: string
@@ -48,38 +50,37 @@ export class CreateCandidateDto {
     sallary_to: string
 
     @IsString()
-    specialization: string
+    specialization: Specialization 
 
     @IsString()
-    cv: string
+    cv: string 
 
-    @IsArray()
-    stack: Array<string>
+    stack: CandidateStack[]
 
-    @IsArray()
-    graduate: Array<{
-        unversity: string,
-        graduate_sertificate: string,
-        graduate_start: string,
-        graduate_end: string,
-        unversity_grade: string,
-        unversity_specialization: string
-    }>
+    // @IsArray()
+    // graduate: Array<{
+    //     unversity: string,
+    //     graduate_sertificate: string,
+    //     graduate_start: string,
+    //     graduate_end: string,
+    //     unversity_grade: string,
+    //     unversity_specialization: string
+    // }>
 
-    @IsArray()
-    cources: Array<{
-        cources_name: string,
-        cources_sertificate: string,
-        cources_specializaton: string
-        cources_start: string,
-        cources_end: string
-    }>
+    // @IsArray()
+    // cources: Array<{
+    //     cources_name: string,
+    //     cources_sertificate: string,
+    //     cources_specializaton: string
+    //     cources_start: string,
+    //     cources_end: string
+    // }>
 
-    @IsArray()
-    baza_experience: Array<{
-        role: string,
-        project_name: string,
-        project_duration: string
-    }>
+    // @IsArray()
+    // baza_experience: Array<{
+    //     role: string,
+    //     project_name: string,
+    //     project_duration: string
+    // }>
 
 }
