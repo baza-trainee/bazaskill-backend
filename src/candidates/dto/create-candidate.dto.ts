@@ -1,9 +1,9 @@
 import { Specialization } from 'src/specialization/entities/specialization.entity';
-import { Stack } from 'src/stack/entities/stack.entity';
-import { IsArray, IsNumber, IsString } from "class-validator";
+import { IsString } from "class-validator";
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
 
 export class CreateCandidateDto {
     @IsString()
@@ -58,17 +58,9 @@ export class CreateCandidateDto {
 
     stack: CandidateStack[]
 
-    // @IsArray()
     graduate: CandidateGraduate[]
 
-    // @IsArray()
-    // cources: Array<{
-    //     cources_name: string,
-    //     cources_sertificate: string,
-    //     cources_specializaton: string
-    //     cources_start: string,
-    //     cources_end: string
-    // }>
+    cources: CandidateCource[]
 
     // @IsArray()
     // baza_experience: Array<{

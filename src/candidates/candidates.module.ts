@@ -7,9 +7,10 @@ import { Candidate } from './entities/candidate.entity';
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Candidate, CandidateLanguage, CandidateStack, CandidateGraduate])],
+  imports: [TypeOrmModule.forFeature([Candidate, CandidateLanguage, CandidateStack, CandidateGraduate, CandidateCource])],
   controllers: [CandidatesController],
   providers: [CandidatesService],
 })

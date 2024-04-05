@@ -8,6 +8,7 @@ import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_la
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { Stack } from 'src/stack/entities/stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
+import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
 
 @Injectable()
 export class CandidatesService {
@@ -16,32 +17,36 @@ export class CandidatesService {
     private readonly candidateRepository: Repository<Candidate>,
     @InjectRepository(CandidateLanguage)
     private readonly candidateLanguageRepository: Repository<CandidateLanguage>,
-    @InjectRepository(CandidateStack) 
+    @InjectRepository(CandidateStack)
     private readonly candidateStackRepository: Repository<CandidateStack>,
     @InjectRepository(CandidateGraduate)
     private readonly candidateGraduateRepository: Repository<CandidateGraduate>,
-  ){}
-  async create(createCandidateDto: CreateCandidateDto) { 
-    const {candidate_language, stack, graduate} = createCandidateDto
+    @InjectRepository(CandidateCource)
+    private readonly candidateCourceRepository: Repository<CandidateCource>
+  ) { }
+  async create(createCandidateDto: CreateCandidateDto) {
+    const { candidate_language, stack, graduate, cources } = createCandidateDto
     const candidate = await this.candidateRepository.save(createCandidateDto);
-    
-    candidate_language.forEach(async (item)=>{
-      await this.candidateLanguageRepository.save({...item, candidate_id: candidate})
+
+    candidate_language.forEach(async (item) => {
+      await this.candidateLanguageRepository.save({ ...item, candidate_id: candidate })
     })
 
-    stack.forEach(async (item)=> {
-      await this.candidateStackRepository.save({stack: item, candidate_id: candidate}) 
-    }) 
+    stack.forEach(async (item) => {
+      await this.candidateStackRepository.save({ stack: item, candidate_id: candidate })
+    })
 
-    graduate.forEach(async (item)=> {
-      await this.candidateGraduateRepository.save({...item, candidate_id: candidate}) 
-    }) 
+    graduate.forEach(async (item) => {
+      await this.candidateGraduateRepository.save({ ...item, candidate_id: candidate })
+    })
 
-    
-    console.log(graduate) 
-    return candidate  
+    cources.forEach(async (item) => {
+      await this.candidateCourceRepository.save({...item, candidate_id: candidate})
+    })
+    console.log(cources)
+    return candidate
   }
- 
+
   findAll() {
     return this.candidateRepository.find({
       relations: {
@@ -50,7 +55,8 @@ export class CandidatesService {
         stack: {
           stack: true
         },
-        gradaute: true
+        gradaute: true,
+        cources: true
       },
     });
   }
