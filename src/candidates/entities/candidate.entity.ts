@@ -85,5 +85,12 @@ export class Candidate {
     @OneToMany(() => OutBazaExperience, (out_baza_experience) => out_baza_experience.candidate_id)
     out_baza_experience: OutBazaExperience[]
 
+    @Column()
+    baza_recomendation: string
 
+    @Column()
+    status: string //working, searching, inactive
+
+    @Column()
+    isPublished: boolean
 }

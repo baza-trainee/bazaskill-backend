@@ -1,5 +1,5 @@
 import { Specialization } from 'src/specialization/entities/specialization.entity';
-import { IsString } from "class-validator";
+import { IsBoolean, IsString } from "class-validator";
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
@@ -67,4 +67,13 @@ export class CreateCandidateDto {
     baza_experience: BazaExperience[]
 
     out_baza_experience: OutBazaExperience[]
+
+    @IsString()
+    baza_recomendation: string
+
+    @IsString()
+    status: string //working, searching, inactive
+
+    @IsBoolean()
+    isPublished: boolean
 }
