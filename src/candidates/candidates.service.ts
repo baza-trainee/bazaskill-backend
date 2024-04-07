@@ -9,6 +9,7 @@ import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.ent
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
 import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
+import { OutBazaExperience } from 'src/out_baza_experience/entities/out_baza_experience.entity';
 
 @Injectable()
 export class CandidatesService {
@@ -24,10 +25,12 @@ export class CandidatesService {
     @InjectRepository(CandidateCource)
     private readonly candidateCourceRepository: Repository<CandidateCource>,
     @InjectRepository(BazaExperience)
-    private readonly bazaExperienceRepository: Repository<BazaExperience>
+    private readonly bazaExperienceRepository: Repository<BazaExperience>,
+    @InjectRepository(OutBazaExperience)
+    private readonly outBazaExperienceRepository: Repository<OutBazaExperience>
   ) { }
   async create(createCandidateDto: CreateCandidateDto) {
-    const { candidate_language, stack, graduate, cources, baza_experience } = createCandidateDto
+    const { candidate_language, stack, graduate, cources, baza_experience, out_baza_experience } = createCandidateDto
     const candidate = await this.candidateRepository.save(createCandidateDto);
     candidate_language.forEach(async (item) => {
       await this.candidateLanguageRepository.save({ ...item, candidate_id: candidate })
@@ -49,6 +52,10 @@ export class CandidatesService {
       await this.bazaExperienceRepository.save({...item, candidate_id: candidate})
     })
 
+
+    out_baza_experience.forEach(async (item) => {
+      await this.outBazaExperienceRepository.save({...item, candidate_id: candidate})
+    })
     return candidate
   }
 
@@ -62,7 +69,8 @@ export class CandidatesService {
         },
         gradaute: true,
         cources: true,
-        baza_experience: true
+        baza_experience: true,
+        out_baza_experience: true
       },
     });
   }

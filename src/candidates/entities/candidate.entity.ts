@@ -5,6 +5,7 @@ import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.ent
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { OutBazaExperience } from 'src/out_baza_experience/entities/out_baza_experience.entity';
 
 
 @Entity('candidate')
@@ -70,14 +71,19 @@ export class Candidate {
 
 
     // //need to implement oneToMany with entity candidate_graduate and entity graduate
-    @OneToMany(() => CandidateGraduate, (graduate)=> graduate.candidate_id )
+    @OneToMany(() => CandidateGraduate, (graduate) => graduate.candidate_id)
     gradaute: CandidateGraduate[]
 
     // //need to implement oneToMany with entity candidate_cources and entity cources
-    @OneToMany(()=> CandidateCource, (course)=> course.candidate_id)
+    @OneToMany(() => CandidateCource, (course) => course.candidate_id)
     cources: CandidateCource[]
 
     // // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
-    @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
+    @OneToMany(() => BazaExperience, (baza_experience) => baza_experience.candidate_id)
     baza_experience: BazaExperience[]
+
+    @OneToMany(() => OutBazaExperience, (out_baza_experience) => out_baza_experience.candidate_id)
+    out_baza_experience: OutBazaExperience[]
+
+
 }
