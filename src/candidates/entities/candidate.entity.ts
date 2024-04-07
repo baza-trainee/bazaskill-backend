@@ -3,8 +3,8 @@ import { Specialization } from 'src/specialization/entities/specialization.entit
 import { CandidateLanguage } from "src/candidate_languages/entities/candidate_language.entity";
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
-// import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('candidate')
@@ -78,6 +78,6 @@ export class Candidate {
     cources: CandidateCource[]
 
     // // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
-    // @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
-    // baza_experience: BazaExperience[]
+    @OneToMany(()=> BazaExperience, (baza_experience)=>baza_experience.candidate_id)
+    baza_experience: BazaExperience[]
 }

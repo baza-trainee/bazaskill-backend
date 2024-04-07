@@ -4,6 +4,7 @@ import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_la
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
+import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
 
 export class CreateCandidateDto {
     @IsString()
@@ -62,11 +63,5 @@ export class CreateCandidateDto {
 
     cources: CandidateCource[]
 
-    // @IsArray()
-    // baza_experience: Array<{
-    //     role: string,
-    //     project_name: string,
-    //     project_duration: string
-    // }>
-
+    baza_experience: BazaExperience[]
 }

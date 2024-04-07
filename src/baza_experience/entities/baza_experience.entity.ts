@@ -7,7 +7,7 @@ export class BazaExperience {
     @PrimaryGeneratedColumn()
     id: number
 
-    @OneToOne(() => Specialization)
+    @ManyToOne(() => Specialization, {onDelete: 'CASCADE'})
     @JoinColumn()
     specialization_id: Specialization
 
@@ -15,9 +15,9 @@ export class BazaExperience {
     project_name: string
 
     @Column()
-    project_duration: number
+    project_duration: string
 
-    @ManyToOne(()=> Candidate, (candidate)=>candidate.baza_experience)
+    @ManyToOne(()=> Candidate, (candidate)=>candidate.baza_experience, {onDelete: 'CASCADE'})
     @JoinColumn({name: 'candidate_id'})
     candidate_id: Candidate
 }

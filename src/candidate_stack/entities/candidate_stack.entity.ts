@@ -11,7 +11,7 @@ export class CandidateStack {
     @JoinColumn({name: 'candidate_id'})
     candidate_id: Candidate
 
-    @ManyToOne(()=> Stack) 
+    @ManyToOne(()=> Stack, {onDelete: 'CASCADE'}) 
     @JoinColumn()
     stack: Stack 
 }

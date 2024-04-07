@@ -29,7 +29,7 @@ import { CandidateLanguagesModule } from './candidate_languages/candidate_langua
 import { CandidateStackModule } from './candidate_stack/candidate_stack.module';
 import { CandidateGraduateModule } from './candidate_graduate/candidate_graduate.module';
 import { CandidateCourcesModule } from './candidate_cources/candidate_cources.module';
-// import { BazaExperienceModule } from './baza_experience/baza_experience.module';
+import { BazaExperienceModule } from './baza_experience/baza_experience.module';
 
 @Module({
   imports: [
@@ -46,6 +46,9 @@ import { CandidateCourcesModule } from './candidate_cources/candidate_cources.mo
         synchronize: true,
         logging: true,
         entities: [__dirname + '/**/*.entity{.js,.ts}'],
+        extra: {
+          connectionLimit: 3
+        }
       }),
       inject: [ConfigService],
     }),
@@ -85,7 +88,7 @@ import { CandidateCourcesModule } from './candidate_cources/candidate_cources.mo
     CandidateStackModule,
     CandidateGraduateModule,
     CandidateCourcesModule,
-    // BazaExperienceModule,
+    BazaExperienceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

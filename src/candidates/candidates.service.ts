@@ -6,9 +6,9 @@ import { UpdateCandidateDto } from './dto/update-candidate.dto';
 import { Repository } from 'typeorm';
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
-import { Stack } from 'src/stack/entities/stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
 import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
+import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
 
 @Injectable()
 export class CandidatesService {
@@ -22,15 +22,16 @@ export class CandidatesService {
     @InjectRepository(CandidateGraduate)
     private readonly candidateGraduateRepository: Repository<CandidateGraduate>,
     @InjectRepository(CandidateCource)
-    private readonly candidateCourceRepository: Repository<CandidateCource>
+    private readonly candidateCourceRepository: Repository<CandidateCource>,
+    @InjectRepository(BazaExperience)
+    private readonly bazaExperienceRepository: Repository<BazaExperience>
   ) { }
   async create(createCandidateDto: CreateCandidateDto) {
-    const { candidate_language, stack, graduate, cources } = createCandidateDto
+    const { candidate_language, stack, graduate, cources, baza_experience } = createCandidateDto
     const candidate = await this.candidateRepository.save(createCandidateDto);
-
     candidate_language.forEach(async (item) => {
       await this.candidateLanguageRepository.save({ ...item, candidate_id: candidate })
-    })
+    }) 
 
     stack.forEach(async (item) => {
       await this.candidateStackRepository.save({ stack: item, candidate_id: candidate })
@@ -42,8 +43,12 @@ export class CandidatesService {
 
     cources.forEach(async (item) => {
       await this.candidateCourceRepository.save({...item, candidate_id: candidate})
+    }) 
+
+    baza_experience.forEach(async (item) => {
+      await this.bazaExperienceRepository.save({...item, candidate_id: candidate})
     })
-    console.log(cources)
+
     return candidate
   }
 
@@ -56,7 +61,8 @@ export class CandidatesService {
           stack: true
         },
         gradaute: true,
-        cources: true
+        cources: true,
+        baza_experience: true
       },
     });
   }
