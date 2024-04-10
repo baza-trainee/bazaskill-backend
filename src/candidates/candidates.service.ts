@@ -36,27 +36,27 @@ export class CandidatesService {
       await this.candidateLanguageRepository.save({ ...item, candidate_id: candidate })
     }) 
 
-    stack.forEach(async (item) => {
-      await this.candidateStackRepository.save({ stack: item, candidate_id: candidate })
+    cources.forEach(async (item) => {
+      await this.candidateCourceRepository.save({...item, candidate_id: candidate})
     })
 
     graduate.forEach(async (item) => {
       await this.candidateGraduateRepository.save({ ...item, candidate_id: candidate })
     })
 
-    cources.forEach(async (item) => {
-      await this.candidateCourceRepository.save({...item, candidate_id: candidate})
-    }) 
-
     baza_experience.forEach(async (item) => {
       await this.bazaExperienceRepository.save({...item, candidate_id: candidate})
     })
 
-
     out_baza_experience.forEach(async (item) => {
       await this.outBazaExperienceRepository.save({...item, candidate_id: candidate})
     })
-    return candidate
+
+    stack.forEach(async (item) => {
+      await this.candidateStackRepository.save({ stack: item, candidate_id: candidate })
+    })
+
+    return candidate 
   }
 
   findAll() {
