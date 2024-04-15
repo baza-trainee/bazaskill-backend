@@ -47,9 +47,6 @@ import { OutBazaExperienceModule } from './out_baza_experience/out_baza_experien
         synchronize: true,
         logging: true,
         entities: [__dirname + '/**/*.entity{.js,.ts}'],
-        extra: {
-          connectionLimit: 3
-        }
       }),
       inject: [ConfigService],
     }),
