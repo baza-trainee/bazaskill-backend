@@ -17,7 +17,7 @@ export class CandidatesController {
   create(
     @UploadedFiles() files: {graduate?: Express.Multer.File[], cources?:  Express.Multer.File[], cv: Express.Multer.File[]},
     @Body() createCandidateDto: CreateCandidateDto
-  ) { 
+  ) {
     const cources = createCandidateDto.cources.map((el, index) =>({...el, cources_sertificate: 'string'}))
     const graduate = createCandidateDto.graduate.map((el, index) =>({...el, graduate_sertificate: 'string'}))
     return this.candidatesService.create({...createCandidateDto, cv: 'string', cources, graduate}); 
