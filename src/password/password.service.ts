@@ -2,9 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Password } from './entities/password.entity';
 import { Repository } from 'typeorm';
-import { MailerService } from '@nestjs-modules/mailer';
 import { JwtService } from '@nestjs/jwt';
-import { MailingService } from '../mailing/mailing.service';
 import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
 import { ResetPasswordDto } from './dto/reset-password.dto';
@@ -18,8 +16,6 @@ export class PasswordService {
     private readonly passwordRepository: Repository<Password>,
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-    private readonly mailerService: MailerService,
-    private readonly mailingService: MailingService,
   ) {}
 
   async createRecord(createPasswordDto: CreatePasswordDto) {
