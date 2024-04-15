@@ -3422,10 +3422,7 @@ window.onload = function() {
             "phone_2": {
               "type": "string"
             },
-            "email_1": {
-              "type": "string"
-            },
-            "email_2": {
+            "email": {
               "type": "string"
             },
             "telegram": {
@@ -3447,8 +3444,7 @@ window.onload = function() {
           "required": [
             "phone_1",
             "phone_2",
-            "email_1",
-            "email_2",
+            "email",
             "telegram",
             "linkedin",
             "discord",
@@ -3465,10 +3461,7 @@ window.onload = function() {
             "phone_2": {
               "type": "string"
             },
-            "email_1": {
-              "type": "string"
-            },
-            "email_2": {
+            "email": {
               "type": "string"
             },
             "telegram": {
