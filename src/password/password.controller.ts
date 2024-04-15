@@ -19,7 +19,7 @@ export class PasswordController {
     description: 'internal server error',
   })
   async forgotPassword(@Body('email') email: string) {
-    return this.passwordService.sendMail(email);
+    return this.passwordService.sendLink(email);
   }
 
   //reset password

@@ -26,7 +26,7 @@ export class PasswordService {
     return await this.passwordRepository.save(createPasswordDto);
   }
 
-  async sendMail(email: string) {
+  async sendLink(email: string) {
     const token = this.jwtService.sign({ email });
 
     await this.createRecord({
@@ -34,30 +34,7 @@ export class PasswordService {
       token,
     });
 
-    const url = `https://cows-shelter-frontend.vercel.app/reset/${token}`;
-
-    await this.mailingService.setTransport();
-    this.mailerService
-      .sendMail({
-        transporterName: 'gmail',
-        to: email,
-        from: 'zdravejuttya.com',
-        subject: 'Reset your password',
-        html: `Click <a href="${url}">here<a/> to reset your password`,
-        context: {
-          code: '38320',
-        },
-      })
-      .then((success) => {
-        console.log(success);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    return {
-      message: 'Перевірте Електронну Пошту',
-    };
+    return { token, message: 'success' };
   }
 
   async remove(id: number) {
