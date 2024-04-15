@@ -27,3 +27,8 @@ export class FileType {
   @ApiProperty()
   file: Express.Multer.File;
 }
+
+export class ResetPasswordResponse {
+  @ApiProperty()
+  token: string;
+}
