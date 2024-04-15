@@ -3,7 +3,7 @@ import { PasswordService } from './password.service';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { IUser, NotFoundResponse } from 'src/types';
+import { IUser, NotFoundResponse, ResetPasswordResponse } from 'src/types';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 
 @ApiTags('Password')
@@ -15,6 +15,11 @@ export class PasswordController {
   @Post('forgot')
   @ApiBody({ type: ForgotPasswordDto })
   @ApiResponse({
+    status: 200,
+    description: 'request send',
+    type: ResetPasswordResponse,
+  })
+  @ApiResponse({
     status: 500,
     description: 'internal server error',
   })
@@ -25,7 +30,7 @@ export class PasswordController {
   //reset password
   @Post('reset')
   @ApiBody({ type: ResetPasswordDto })
-  @ApiResponse({ status: 201, description: 'reset password', type: IUser })
+  @ApiResponse({ status: 200, description: 'reset password', type: IUser })
   @ApiResponse({
     status: 404,
     description: 'not found',

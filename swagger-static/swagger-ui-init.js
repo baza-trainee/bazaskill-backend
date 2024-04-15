@@ -385,6 +385,16 @@ window.onload = function() {
             }
           },
           "responses": {
+            "200": {
+              "description": "request send",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResetPasswordResponse"
+                  }
+                }
+              }
+            },
             "500": {
               "description": "internal server error"
             }
@@ -409,7 +419,7 @@ window.onload = function() {
             }
           },
           "responses": {
-            "201": {
+            "200": {
               "description": "reset password",
               "content": {
                 "application/json": {
@@ -3054,6 +3064,17 @@ window.onload = function() {
           },
           "required": [
             "email"
+          ]
+        },
+        "ResetPasswordResponse": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "token"
           ]
         },
         "ResetPasswordDto": {
