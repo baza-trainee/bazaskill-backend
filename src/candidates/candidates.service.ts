@@ -106,6 +106,7 @@ export class CandidatesService {
   }
 
   update(id: number, updateCandidateDto: UpdateCandidateDto) {
+    console.log(updateCandidateDto);
     return `This action updates a #${id} candidate`;
   }
 
