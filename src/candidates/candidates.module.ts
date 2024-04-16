@@ -9,6 +9,7 @@ import { CandidateGraduate } from '../candidate_graduate/entities/candidate_grad
 import { CandidateCource } from '../candidate_cources/entities/candidate_cource.entity';
 import { BazaExperience } from '../baza_experience/entities/baza_experience.entity';
 import { OutBazaExperience } from '../out_baza_experience/entities/out_baza_experience.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Module({
   imports: [
@@ -23,6 +24,6 @@ import { OutBazaExperience } from '../out_baza_experience/entities/out_baza_expe
     ]),
   ],
   controllers: [CandidatesController],
-  providers: [CandidatesService],
+  providers: [CandidatesService, CloudinaryService],
 })
 export class CandidatesModule {}

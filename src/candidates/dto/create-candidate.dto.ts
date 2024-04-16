@@ -1,5 +1,5 @@
 import { Specialization } from 'src/specialization/entities/specialization.entity';
-import { IsBoolean, IsString } from "class-validator";
+import { IsBoolean, IsString } from 'class-validator';
 import { CandidateLanguage } from 'src/candidate_languages/entities/candidate_language.entity';
 import { CandidateStack } from 'src/candidate_stack/entities/candidate_stack.entity';
 import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_graduate.entity';
@@ -8,72 +8,72 @@ import { BazaExperience } from 'src/baza_experience/entities/baza_experience.ent
 import { OutBazaExperience } from 'src/out_baza_experience/entities/out_baza_experience.entity';
 
 export class CreateCandidateDto {
-    @IsString()
-    name_ua: string
+  @IsString()
+  name_ua: string;
 
-    @IsString()
-    surname_ua: string
+  @IsString()
+  surname_ua: string;
 
-    @IsString()
-    name: string
+  @IsString()
+  name: string;
 
-    @IsString()
-    surname: string
+  @IsString()
+  surname: string;
 
-    @IsString()
-    country: string
+  @IsString()
+  country: string;
 
-    @IsString()
-    city: string
+  @IsString()
+  city: string;
 
-    @IsString()
-    phone: string
+  @IsString()
+  phone: string;
 
-    @IsString()
-    email: string
+  @IsString()
+  email: string;
 
-    @IsString()
-    linkedin: string
+  @IsString()
+  linkedin: string;
 
-    @IsString()
-    discord: string
+  @IsString()
+  discord: string;
 
-    @IsString()
-    telegram: string 
-  
-    candidate_language: CandidateLanguage[]
+  @IsString()
+  telegram: string;
 
-    @IsString()
-    work_format: string
+  candidate_language: CandidateLanguage[];
 
-    @IsString()
-    sallary_form: string
+  @IsString()
+  work_format: string;
 
-    @IsString()
-    sallary_to: string
+  @IsString()
+  sallary_form: string;
 
-    @IsString()
-    specialization: Specialization 
+  @IsString()
+  sallary_to: string;
 
-    @IsString()
-    cv: string 
+  @IsString()
+  specialization: Specialization;
 
-    stack: CandidateStack[]
+  @IsString()
+  cv: string;
 
-    graduate: CandidateGraduate[]
+  stack: CandidateStack[];
 
-    cources: CandidateCource[]
+  graduate: CandidateGraduate[];
 
-    baza_experience: BazaExperience[]
+  cources: CandidateCource[];
 
-    out_baza_experience: OutBazaExperience[]
+  baza_experience: BazaExperience[];
 
-    @IsString()
-    baza_recomendation: string
+  out_baza_experience: OutBazaExperience[];
 
-    @IsString()
-    status: string //working, searching, inactive
+  @IsString()
+  baza_recomendation: string;
 
-    @IsBoolean()
-    isPublished: boolean
+  @IsString()
+  status: string; //working, searching, inactive
+
+  @IsBoolean()
+  isPublished: boolean;
 }
