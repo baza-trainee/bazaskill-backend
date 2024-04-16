@@ -9,11 +9,15 @@ import {
   Patch,
   Param,
   Delete,
+  UploadedFile,
 } from '@nestjs/common';
 import { CandidatesService } from './candidates.service';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
 import { UpdateCandidateDto } from './dto/update-candidate.dto';
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import {
+  FileFieldsInterceptor,
+  FileInterceptor,
+} from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('candidates')
@@ -23,75 +27,50 @@ export class CandidatesController {
     private readonly cloudinaryService: CloudinaryService,
   ) {}
 
-  @Post('/upload')
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'graduate' },
-      { name: 'cources' },
-      { name: 'cv' },
-    ]),
-  )
-  async upload(
+  @Post('/upload-cv')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadOne(@UploadedFile() file: Express.Multer.File) {
+    const responses = await this.cloudinaryService.uploadFile(
+      file,
+      'baza_skill_cv',
+    );
+    return responses;
+  }
+
+  @Post('/upload-graduate')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'graduate' }]))
+  async uploadGraduate(
     @UploadedFiles()
     files: {
       graduate?: Express.Multer.File[];
-      cources?: Express.Multer.File[];
-      cv: Express.Multer.File[];
     },
   ) {
     const responses = await this.cloudinaryService.uploadMultipleFiles(
       files.graduate,
-      'baza_skill_test',
+      'baza_skill_certificates',
+    );
+    return responses;
+  }
+
+  @Post('/upload-cources')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'cources' }]))
+  async uploadCources(
+    @UploadedFiles()
+    files: {
+      cources?: Express.Multer.File[];
+    },
+  ) {
+    const responses = await this.cloudinaryService.uploadMultipleFiles(
+      files.cources,
+      'baza_skill_certificates',
     );
     return responses;
   }
 
   @Post()
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'graduate' },
-      { name: 'cources' },
-      { name: 'cv' },
-    ]),
-  )
-  async create(
-    @UploadedFiles()
-    files: {
-      graduate?: Express.Multer.File[];
-      cources?: Express.Multer.File[];
-      cv: Express.Multer.File;
-    },
-    @Body() createCandidateDto: CreateCandidateDto,
-  ) {
-    const courses_response = await this.cloudinaryService.uploadMultipleFiles(
-      files.cources,
-      'baza_skill_certificates',
-    );
-    const cources = createCandidateDto.cources.map((el, index) => ({
-      ...el,
-      cources_sertificate: courses_response[index].url,
-    }));
-
-    const graduate_response = await this.cloudinaryService.uploadMultipleFiles(
-      files.graduate,
-      'baza_skill_certificates',
-    );
-
-    const graduate = createCandidateDto.graduate.map((el, index) => ({
-      ...el,
-      graduate_sertificate: graduate_response[index].url,
-    }));
-
-    const cv_response = await this.cloudinaryService.uploadFile(
-      files.cv,
-      'baza_skill_cv',
-    );
-
+  async create(@Body() createCandidateDto: CreateCandidateDto) {
     return this.candidatesService.create({
       ...createCandidateDto,
-      cv: cv_response.url,
-      cources,
-      graduate,
     });
   }
 

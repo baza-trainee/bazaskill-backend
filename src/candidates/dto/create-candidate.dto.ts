@@ -60,7 +60,7 @@ export class CreateCandidateDto {
 
   stack: CandidateStack[];
 
-  graduate: CandidateGraduate[];
+  gradaute: CandidateGraduate[];
 
   cources: CandidateCource[];
 
