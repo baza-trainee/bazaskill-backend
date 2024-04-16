@@ -17,6 +17,7 @@ export class SpecializationStackService {
     @InjectRepository(Specialization)
     private readonly specializationRepository: Repository<Specialization>,
   ) {}
+
   async create(createSpecializationStackDto: CreateSpecializationStackDto) {
     const stack = await this.stackRepository.findOne({
       where: { id: +createSpecializationStackDto.stack_id },
@@ -45,7 +46,9 @@ export class SpecializationStackService {
         `stack: ${funcStack.stack_id.title} for function:${funcStack.specialization_id.title} already exist`,
       );
     }
-    return this.specializationStackRepository.save(createSpecializationStackDto);
+    return this.specializationStackRepository.save(
+      createSpecializationStackDto,
+    );
   }
 
   async findAll() {

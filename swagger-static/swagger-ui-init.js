@@ -2237,9 +2237,31 @@ window.onload = function() {
           ]
         }
       },
-      "/api/v1/candidates/upload": {
+      "/api/v1/candidates/upload-cv": {
         "post": {
-          "operationId": "CandidatesController_upload",
+          "operationId": "CandidatesController_uploadOne",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/candidates/upload-graduate": {
+        "post": {
+          "operationId": "CandidatesController_uploadGraduate",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/candidates/upload-cources": {
+        "post": {
+          "operationId": "CandidatesController_uploadCources",
           "parameters": [],
           "responses": {
             "201": {
