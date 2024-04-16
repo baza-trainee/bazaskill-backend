@@ -27,36 +27,64 @@ export class CandidatesService {
     @InjectRepository(BazaExperience)
     private readonly bazaExperienceRepository: Repository<BazaExperience>,
     @InjectRepository(OutBazaExperience)
-    private readonly outBazaExperienceRepository: Repository<OutBazaExperience>
-  ) { }
+    private readonly outBazaExperienceRepository: Repository<OutBazaExperience>,
+  ) {}
+
   async create(createCandidateDto: CreateCandidateDto) {
-    const { candidate_language, stack, graduate, cources, baza_experience, out_baza_experience } = createCandidateDto
+    const {
+      candidate_language,
+      stack,
+      graduate,
+      cources,
+      baza_experience,
+      out_baza_experience,
+    } = createCandidateDto;
+
     const candidate = await this.candidateRepository.save(createCandidateDto);
+
     candidate_language.forEach(async (item) => {
-      await this.candidateLanguageRepository.save({ ...item, candidate_id: candidate })
-    }) 
+      await this.candidateLanguageRepository.save({
+        ...item,
+        candidate_id: candidate,
+      });
+    });
 
     cources.forEach(async (item) => {
-      await this.candidateCourceRepository.save({...item, candidate_id: candidate})
-    })
+      await this.candidateCourceRepository.save({
+        ...item,
+        candidate_id: candidate,
+      });
+    });
 
     graduate.forEach(async (item) => {
-      await this.candidateGraduateRepository.save({ ...item, candidate_id: candidate })
-    })
+      await this.candidateGraduateRepository.save({
+        ...item,
+        candidate_id: candidate,
+      });
+    });
 
     baza_experience.forEach(async (item) => {
-      await this.bazaExperienceRepository.save({...item, candidate_id: candidate})
-    })
+      await this.bazaExperienceRepository.save({
+        ...item,
+        candidate_id: candidate,
+      });
+    });
 
     out_baza_experience.forEach(async (item) => {
-      await this.outBazaExperienceRepository.save({...item, candidate_id: candidate})
-    })
+      await this.outBazaExperienceRepository.save({
+        ...item,
+        candidate_id: candidate,
+      });
+    });
 
     stack.forEach(async (item) => {
-      await this.candidateStackRepository.save({ stack: item, candidate_id: candidate })
-    })
+      await this.candidateStackRepository.save({
+        stack: item,
+        candidate_id: candidate,
+      });
+    });
 
-    return candidate 
+    return candidate;
   }
 
   findAll() {
@@ -65,21 +93,35 @@ export class CandidatesService {
         specialization: true,
         candidate_language: true,
         stack: {
-          stack: true
+          stack: true,
         },
         gradaute: true,
         cources: true,
         baza_experience: true,
-        out_baza_experience: true
+        out_baza_experience: true,
       },
     });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} candidate`;
+    return this.candidateRepository.findOne({
+      where: { id },
+      relations: {
+        specialization: true,
+        candidate_language: true,
+        stack: {
+          stack: true,
+        },
+        gradaute: true,
+        cources: true,
+        baza_experience: true,
+        out_baza_experience: true,
+      },
+    });
   }
 
   update(id: number, updateCandidateDto: UpdateCandidateDto) {
+    console.log(updateCandidateDto);
     return `This action updates a #${id} candidate`;
   }
 

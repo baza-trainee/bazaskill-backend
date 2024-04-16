@@ -51,7 +51,6 @@ export class DocumentsController {
     },
   })
   @UseInterceptors(FileInterceptor('file'))
-  // @UseGuards(JwtAuthGuard)
   async create(
     @UploadedFile() file: Express.Multer.File,
     @Body() createDocumentDto: CreateDocumentDto,

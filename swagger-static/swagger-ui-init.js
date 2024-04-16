@@ -2237,6 +2237,17 @@ window.onload = function() {
           ]
         }
       },
+      "/api/v1/candidates/upload": {
+        "post": {
+          "operationId": "CandidatesController_upload",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          }
+        }
+      },
       "/api/v1/candidates": {
         "post": {
           "operationId": "CandidatesController_create",
