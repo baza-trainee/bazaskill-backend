@@ -395,6 +395,9 @@ window.onload = function() {
                 }
               }
             },
+            "404": {
+              "description": "account notfound"
+            },
             "500": {
               "description": "internal server error"
             }

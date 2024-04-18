@@ -20,6 +20,10 @@ export class PasswordController {
     type: ResetPasswordResponse,
   })
   @ApiResponse({
+    status: 404,
+    description: 'account notfound',
+  })
+  @ApiResponse({
     status: 500,
     description: 'internal server error',
   })

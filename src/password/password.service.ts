@@ -23,6 +23,15 @@ export class PasswordService {
   }
 
   async sendLink(email: string) {
+    const existedEmail = await this.userService.findOne(email);
+
+    if (!existedEmail) {
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
     const token = this.jwtService.sign({ email });
 
     await this.createRecord({
