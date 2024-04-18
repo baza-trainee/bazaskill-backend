@@ -5,6 +5,7 @@ import { UpdateBazaExperienceDto } from './dto/update-baza_experience.dto';
 @Injectable()
 export class BazaExperienceService {
   create(createBazaExperienceDto: CreateBazaExperienceDto) {
+    console.log(createBazaExperienceDto);
     return 'This action adds a new bazaExperience';
   }
 
