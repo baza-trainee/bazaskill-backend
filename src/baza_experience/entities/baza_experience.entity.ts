@@ -15,7 +15,7 @@ export class BazaExperience {
 
   @ManyToOne(() => Specialization, { onDelete: 'CASCADE' })
   @JoinColumn()
-  specialization_id: Specialization;
+  specialization: Specialization;
 
   @Column()
   project_name: string;

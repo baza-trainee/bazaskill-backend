@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { BazaExperienceService } from './baza_experience.service';
 import { CreateBazaExperienceDto } from './dto/create-baza_experience.dto';
 import { UpdateBazaExperienceDto } from './dto/update-baza_experience.dto';
@@ -23,7 +31,10 @@ export class BazaExperienceController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBazaExperienceDto: UpdateBazaExperienceDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateBazaExperienceDto: UpdateBazaExperienceDto,
+  ) {
     return this.bazaExperienceService.update(+id, updateBazaExperienceDto);
   }
 

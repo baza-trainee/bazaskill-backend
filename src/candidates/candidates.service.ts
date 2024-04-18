@@ -101,7 +101,10 @@ export class CandidatesService {
         },
         gradaute: true,
         cources: true,
-        baza_experience: true,
+        baza_experience: {
+          specialization: true, // Include specialization relation from BazaExperience
+          candidate_id: true, // Include candidate_id relation from BazaExperience
+        },
         out_baza_experience: true,
       },
     });
@@ -118,7 +121,10 @@ export class CandidatesService {
         },
         gradaute: true,
         cources: true,
-        baza_experience: true,
+        baza_experience: {
+          specialization: true, // Include specialization relation from BazaExperience
+          candidate_id: true, // Include candidate_id relation from BazaExperience
+        },
         out_baza_experience: true,
       },
     });
