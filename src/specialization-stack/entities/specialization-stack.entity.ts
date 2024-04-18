@@ -12,12 +12,15 @@ export class SpecializationStack {
   @ManyToOne(
     () => Specialization,
     (specialization) => specialization.specialization_id,
+    { onUpdate: 'CASCADE' },
   )
   @JoinColumn({ name: 'specialization_id' })
   specialization_id: Specialization;
 
   @ApiProperty({ description: 'Stack id where stack HTML/CSS or Figma etc' })
-  @ManyToOne(() => Stack, (stack) => stack.stack_specialization_id)
+  @ManyToOne(() => Stack, (stack) => stack.stack_specialization_id, {
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'stack_id' })
   stack_id: Stack;
 }

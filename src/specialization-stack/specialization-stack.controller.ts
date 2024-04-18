@@ -11,7 +11,6 @@ import {
 import { SpecializationStackService } from './specialization-stack.service';
 import { CreateSpecializationStackDto } from './dto/create-specialization-stack.dto';
 import { UpdateSpecializationStackDto } from './dto/update-specialization-stack.dto';
-// import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('specialization-stack')
 export class SpecializationStackController {

@@ -84,7 +84,7 @@ export class CandidatesController {
     return this.candidatesService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Post(':id')
   update(
     @Param('id') id: string,
     @Body() updateCandidateDto: UpdateCandidateDto,

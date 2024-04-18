@@ -32,6 +32,9 @@ export class Candidate {
   surname: string;
 
   @Column()
+  about: string;
+
+  @Column()
   country: string;
 
   @Column()
