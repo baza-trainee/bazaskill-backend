@@ -21,6 +21,9 @@ export class CreateCandidateDto {
   surname: string;
 
   @IsString()
+  about: string;
+
+  @IsString()
   country: string;
 
   @IsString()

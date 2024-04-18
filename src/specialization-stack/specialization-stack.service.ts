@@ -39,6 +39,7 @@ export class SpecializationStackService {
         specialization_id: true,
       },
     });
+
     if (!stack || !func) {
       return new ForbiddenException('stack or function not exist');
     } else if (funcStack) {
@@ -65,6 +66,7 @@ export class SpecializationStackService {
   }
 
   update(id: number, updateFunctionStackDto: UpdateSpecializationStackDto) {
+    console.log(updateFunctionStackDto);
     return `This action updates a #${id} functionStack`;
   }
 

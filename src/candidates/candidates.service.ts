@@ -1,5 +1,5 @@
 import { Candidate } from './entities/candidate.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
 import { UpdateCandidateDto } from './dto/update-candidate.dto';
@@ -124,12 +124,83 @@ export class CandidatesService {
     });
   }
 
-  update(id: number, updateCandidateDto: UpdateCandidateDto) {
-    console.log(updateCandidateDto);
-    return `This action updates a #${id} candidate`;
+  async update(id: number, updateCandidateDto: UpdateCandidateDto) {
+    const {
+      candidate_language,
+      stack,
+      gradaute,
+      cources,
+      baza_experience,
+      out_baza_experience,
+    } = updateCandidateDto;
+
+    const foundCandidate = await this.candidateRepository.findOne({
+      where: { id },
+    });
+    if (!foundCandidate) {
+      throw new NotFoundException('Candidate not found');
+    }
+
+    try {
+      await this.candidateRepository.delete(id);
+
+      const candidate = await this.candidateRepository.save(updateCandidateDto);
+
+      candidate_language.forEach(async (item) => {
+        await this.candidateLanguageRepository.save({
+          ...item,
+          candidate_id: candidate,
+        });
+      });
+
+      cources.forEach(async (item) => {
+        await this.candidateCourceRepository.save({
+          ...item,
+          candidate_id: candidate,
+        });
+      });
+
+      gradaute.forEach(async (item) => {
+        await this.candidateGraduateRepository.save({
+          ...item,
+          candidate_id: candidate,
+        });
+      });
+
+      baza_experience.forEach(async (item) => {
+        await this.bazaExperienceRepository.save({
+          ...item,
+          candidate_id: candidate,
+        });
+      });
+
+      out_baza_experience.forEach(async (item) => {
+        await this.outBazaExperienceRepository.save({
+          ...item,
+          candidate_id: candidate,
+        });
+      });
+
+      stack.forEach(async (item) => {
+        await this.candidateStackRepository.save({
+          stack: item,
+          candidate_id: candidate,
+        });
+      });
+
+      return candidate;
+    } catch (error) {
+      console.error('Failed to update candidate language:', error);
+      throw new Error('Failed to update candidate language');
+    }
   }
 
-  remove(id: number) {
-    return this.candidateRepository.delete(id);
+  async remove(id: number) {
+    const candidate = this.candidateRepository.findOne({
+      where: { id },
+    });
+    if (!candidate) throw new NotFoundException('Candidate not found');
+    await this.candidateRepository.delete(id);
+    return { message: 'candidate successfully deleted' };
   }
 }

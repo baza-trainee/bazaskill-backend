@@ -1,7 +1,6 @@
-
-import { ApiProperty } from "@nestjs/swagger";
-import { SpecializationStack } from "src/specialization-stack/entities/specialization-stack.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { SpecializationStack } from 'src/specialization-stack/entities/specialization-stack.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('specialization')
 export class Specialization {
@@ -16,6 +15,9 @@ export class Specialization {
   @Column()
   title: string;
 
-  @OneToMany(() => SpecializationStack, (specialization) => specialization.specialization_id)
+  @OneToMany(
+    () => SpecializationStack,
+    (specialization) => specialization.specialization_id,
+  )
   specialization_id: SpecializationStack[];
 }

@@ -4,6 +4,7 @@ import { CreateStackDto } from './dto/create-stack.dto';
 import { UpdateStackDto } from './dto/update-stack.dto';
 import { Stack } from './entities/stack.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ConflictException } from '@nestjs/common';
 
 @Injectable()
 export class StackService {
@@ -13,13 +14,12 @@ export class StackService {
   ) {}
 
   async create(createStackDto: CreateStackDto) {
-    console.log(createStackDto);
     try {
       const stack = await this.stackRepository.findOne({
         where: { title: createStackDto.title },
       });
       if (stack) {
-        return new ForbiddenException(
+        return new ConflictException(
           `Stack ${createStackDto.title} already exist`,
         );
       }

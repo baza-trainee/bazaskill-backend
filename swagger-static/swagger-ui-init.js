@@ -2319,7 +2319,7 @@ window.onload = function() {
             }
           }
         },
-        "patch": {
+        "post": {
           "operationId": "CandidatesController_update",
           "parameters": [
             {
@@ -2342,7 +2342,7 @@ window.onload = function() {
             }
           },
           "responses": {
-            "200": {
+            "201": {
               "description": ""
             }
           }
