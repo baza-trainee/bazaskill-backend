@@ -5,4 +5,8 @@ export class CreateStackDto {
   @ApiProperty()
   @IsString()
   title: string;
+
+  @ApiProperty()
+  @IsString()
+  specialization_id: string;
 }

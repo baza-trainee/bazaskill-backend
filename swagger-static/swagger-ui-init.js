@@ -3320,16 +3320,23 @@ window.onload = function() {
           "properties": {
             "title": {
               "type": "string"
+            },
+            "specialization_id": {
+              "type": "string"
             }
           },
           "required": [
-            "title"
+            "title",
+            "specialization_id"
           ]
         },
         "UpdateStackDto": {
           "type": "object",
           "properties": {
             "title": {
+              "type": "string"
+            },
+            "specialization_id": {
               "type": "string"
             }
           }
