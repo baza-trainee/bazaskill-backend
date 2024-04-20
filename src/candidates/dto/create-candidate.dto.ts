@@ -61,6 +61,9 @@ export class CreateCandidateDto {
   @IsString()
   cv: string;
 
+  @IsString()
+  cv_id: string;
+
   stack: CandidateStack[];
 
   gradaute: CandidateGraduate[];

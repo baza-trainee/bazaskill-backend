@@ -75,6 +75,9 @@ export class Candidate {
   @Column()
   cv: string;
 
+  @Column()
+  cv_id: string;
+
   //need to implement oneToMany with entity candidate_stack
   @OneToMany(() => CandidateStack, (stack) => stack.candidate_id)
   stack: CandidateStack[];

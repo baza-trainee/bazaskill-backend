@@ -10,6 +10,7 @@ import { CandidateGraduate } from 'src/candidate_graduate/entities/candidate_gra
 import { CandidateCource } from 'src/candidate_cources/entities/candidate_cource.entity';
 import { BazaExperience } from 'src/baza_experience/entities/baza_experience.entity';
 import { OutBazaExperience } from 'src/out_baza_experience/entities/out_baza_experience.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class CandidatesService {
@@ -28,6 +29,7 @@ export class CandidatesService {
     private readonly bazaExperienceRepository: Repository<BazaExperience>,
     @InjectRepository(OutBazaExperience)
     private readonly outBazaExperienceRepository: Repository<OutBazaExperience>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(createCandidateDto: CreateCandidateDto) {
@@ -148,7 +150,7 @@ export class CandidatesService {
     }
 
     try {
-      await this.candidateRepository.delete(id);
+      await this.remove(id);
 
       const candidate = await this.candidateRepository.save(updateCandidateDto);
 
@@ -202,11 +204,18 @@ export class CandidatesService {
   }
 
   async remove(id: number) {
-    const candidate = this.candidateRepository.findOne({
-      where: { id },
-    });
+    const candidate = this.findOne(id);
     if (!candidate) throw new NotFoundException('Candidate not found');
+    const public_ids = [];
+    public_ids.push((await candidate).cv_id);
+    (await candidate).cources.map((cource) => {
+      public_ids.push(cource.cources_sertificate_id);
+    });
+    (await candidate).gradaute.map((item) => {
+      public_ids.push(item.graduate_sertificate_id);
+    });
     await this.candidateRepository.delete(id);
+    await this.cloudinaryService.deleteFiles(public_ids);
     return { message: 'candidate successfully deleted' };
   }
 }
