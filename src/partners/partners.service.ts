@@ -4,12 +4,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PartnersService {
   constructor(
     @InjectRepository(Partner)
     private readonly partnersRepository: Repository<Partner>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
   create(
     public_cloudinary_id: string,
@@ -59,6 +61,7 @@ export class PartnersService {
     });
     if (!partner) throw new NotFoundException('This partner not found');
     await this.partnersRepository.delete(id);
+    await this.cloudinaryService.deleteFile(partner.public_cloudinary_id);
     return { message: 'partner successefuly deleted', partner };
   }
 }
