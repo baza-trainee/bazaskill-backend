@@ -19,6 +19,9 @@ export class CandidateCource {
   cources_sertificate: string;
 
   @Column()
+  cources_sertificate_id: string;
+
+  @Column()
   cources_specializaton: string;
 
   @Column()

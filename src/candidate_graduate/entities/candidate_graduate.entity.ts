@@ -30,6 +30,9 @@ export class CandidateGraduate {
   @Column()
   graduate_sertificate: string;
 
+  @Column()
+  graduate_sertificate_id: string;
+
   @ManyToOne(() => Candidate, (candidate) => candidate.gradaute, {
     onDelete: 'CASCADE',
   })

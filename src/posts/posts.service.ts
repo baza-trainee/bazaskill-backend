@@ -9,12 +9,14 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PostEntity } from './entities/post.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PostsService {
   constructor(
     @InjectRepository(PostEntity)
     private readonly postsRepository: Repository<PostEntity>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(
@@ -72,6 +74,7 @@ export class PostsService {
     });
     if (!post) throw new NotFoundException('Post not found');
     await this.postsRepository.delete(id);
+    await this.cloudinaryService.deleteFile(post.image_id);
     return { message: 'post successefuly deleted', post };
   }
 }

@@ -49,4 +49,17 @@ export class CloudinaryService {
       console.log(error);
     }
   }
+
+  async deleteFiles(public_ids: string[]) {
+    try {
+      const deletionPromises = public_ids.map((public_id) =>
+        cloudinary.uploader.destroy(public_id),
+      );
+      await Promise.all(deletionPromises);
+      return { success: true };
+    } catch (error) {
+      console.log(error);
+      return { success: false, error: error.message }; // Optionally handle error response
+    }
+  }
 }

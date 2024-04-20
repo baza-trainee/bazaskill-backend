@@ -9,12 +9,14 @@ import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 import { Testimonial } from './entities/testimonial.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class TestimonialsService {
   constructor(
     @InjectRepository(Testimonial)
     private readonly testimonialsRepository: Repository<Testimonial>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(
@@ -92,6 +94,7 @@ export class TestimonialsService {
       });
       if (!testimonial) throw new NotFoundException('This review not found');
       await this.testimonialsRepository.delete(id);
+      await this.cloudinaryService.deleteFile(testimonial.image_id);
       return { message: 'review successfully deleted', testimonial };
     } catch (error) {
       throw new HttpException(
