@@ -2848,102 +2848,6 @@ window.onload = function() {
             }
           }
         }
-      },
-      "/api/v1/out-baza-experience": {
-        "post": {
-          "operationId": "OutBazaExperienceController_create",
-          "parameters": [],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateOutBazaExperienceDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": ""
-            }
-          }
-        },
-        "get": {
-          "operationId": "OutBazaExperienceController_findAll",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        }
-      },
-      "/api/v1/out-baza-experience/{id}": {
-        "get": {
-          "operationId": "OutBazaExperienceController_findOne",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        },
-        "patch": {
-          "operationId": "OutBazaExperienceController_update",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateOutBazaExperienceDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        },
-        "delete": {
-          "operationId": "OutBazaExperienceController_remove",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        }
       }
     },
     "info": {
@@ -3740,14 +3644,6 @@ window.onload = function() {
           "properties": {}
         },
         "UpdateBazaExperienceDto": {
-          "type": "object",
-          "properties": {}
-        },
-        "CreateOutBazaExperienceDto": {
-          "type": "object",
-          "properties": {}
-        },
-        "UpdateOutBazaExperienceDto": {
           "type": "object",
           "properties": {}
         }
