@@ -27,7 +27,6 @@ import { CandidateStackModule } from './candidate_stack/candidate_stack.module';
 import { CandidateGraduateModule } from './candidate_graduate/candidate_graduate.module';
 import { CandidateCourcesModule } from './candidate_cources/candidate_cources.module';
 import { BazaExperienceModule } from './baza_experience/baza_experience.module';
-import { OutBazaExperienceModule } from './out_baza_experience/out_baza_experience.module';
 
 @Module({
   imports: [
@@ -73,7 +72,6 @@ import { OutBazaExperienceModule } from './out_baza_experience/out_baza_experien
     CandidateGraduateModule,
     CandidateCourcesModule,
     BazaExperienceModule,
-    OutBazaExperienceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

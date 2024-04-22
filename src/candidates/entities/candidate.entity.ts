@@ -12,7 +12,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { OutBazaExperience } from 'src/out_baza_experience/entities/out_baza_experience.entity';
 
 @Entity('candidate')
 export class Candidate {
@@ -96,12 +95,6 @@ export class Candidate {
     (baza_experience) => baza_experience.candidate_id,
   )
   baza_experience: BazaExperience[];
-
-  @OneToMany(
-    () => OutBazaExperience,
-    (out_baza_experience) => out_baza_experience.candidate_id,
-  )
-  out_baza_experience: OutBazaExperience[];
 
   @Column()
   baza_recomendation: string;
