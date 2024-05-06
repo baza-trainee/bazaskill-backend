@@ -77,6 +77,9 @@ export class CreateCandidateDto {
   @IsString()
   status: string; //working, searching, inactive
 
+  @IsString()
+  uniqueId: string;
+
   @IsBoolean()
   isPublished: boolean;
 }

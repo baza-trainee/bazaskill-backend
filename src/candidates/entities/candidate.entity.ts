@@ -103,5 +103,8 @@ export class Candidate {
   status: string; //working, searching, inactive
 
   @Column()
+  uniqueId: string;
+
+  @Column()
   isPublished: boolean;
 }
