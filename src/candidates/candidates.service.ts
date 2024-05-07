@@ -64,13 +64,6 @@ export class CandidatesService {
         });
       });
 
-      // out_baza_experience.forEach(async (item) => {
-      //   await this.outBazaExperienceRepository.save({
-      //     ...item,
-      //     candidate_id: candidate,
-      //   });
-      // });
-
       stack.forEach(async (item) => {
         await this.candidateStackRepository.save({
           stack: item,
@@ -191,7 +184,9 @@ export class CandidatesService {
       public_ids.push(item.graduate_sertificate_id);
     });
     await this.candidateRepository.delete(id);
-    await this.cloudinaryService.deleteFiles(public_ids);
+    await this.cloudinaryService.deleteFiles(
+      public_ids.filter((id) => id !== ''),
+    );
     return { message: 'candidate successfully deleted' };
   }
 }
