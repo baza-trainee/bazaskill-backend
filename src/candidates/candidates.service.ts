@@ -126,7 +126,7 @@ export class CandidatesService {
     }
 
     try {
-      await this.remove(id);
+      await this.removeFromDb(id);
 
       const candidate = await this.candidateRepository.save(updateCandidateDto);
 
@@ -170,6 +170,13 @@ export class CandidatesService {
       console.error('Failed to update candidate language:', error);
       throw new Error('Failed to update candidate language');
     }
+  }
+
+  async removeFromDb(id: number) {
+    const candidate = this.findOne(id);
+    if (!candidate) throw new NotFoundException('Candidate not found');
+    await this.candidateRepository.delete(id);
+    return { message: 'candidate successfully deleted' };
   }
 
   async remove(id: number) {
