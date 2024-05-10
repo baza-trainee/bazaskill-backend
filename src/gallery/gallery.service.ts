@@ -41,19 +41,6 @@ export class GalleryService {
     if (!image) throw new NotFoundException('image not found');
     await this.cloudinaryService.deleteFile(image.image_id);
     await this.galleryRepository.delete(id);
-    return { success: true };
-  }
-
-  async findAllWithPagination(page: number, limit: number) {
-    const allImages = await this.findAll();
-    const totalLength = allImages.length;
-    const images = await this.galleryRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-      take: limit,
-      skip: (page - 1) * limit,
-    });
-    return { images, totalLength };
+    return { message: 'Image successfully removed' };
   }
 }

@@ -22,7 +22,7 @@ export class SpecializationService {
     });
     if (func) {
       return new ForbiddenException(
-        `Funсtion ${createFunctionDto.title} allready exist`,
+        `Funсtion ${createFunctionDto.title} already exist`,
       );
     }
     return await this.specializtionRepository.save(createFunctionDto);

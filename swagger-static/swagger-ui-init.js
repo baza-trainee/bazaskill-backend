@@ -146,60 +146,6 @@ window.onload = function() {
           ]
         }
       },
-      "/api/v1/gallery/pagination": {
-        "get": {
-          "operationId": "GalleryController_findAllWithPagination",
-          "parameters": [
-            {
-              "name": "page",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            },
-            {
-              "name": "limit",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "get all images",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Gallery"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Gallery"
-          ]
-        }
-      },
       "/api/v1/gallery": {
         "post": {
           "operationId": "GalleryController_create",
@@ -333,30 +279,6 @@ window.onload = function() {
                 "application/json": {
                   "schema": {
                     "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Gallery"
-          ]
-        }
-      },
-      "/api/v1/gallery/upload": {
-        "post": {
-          "operationId": "GalleryController_uploadFile",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "upload image",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/UploadImageResponse"
                   }
                 }
               }
@@ -2848,6 +2770,112 @@ window.onload = function() {
             }
           }
         }
+      },
+      "/api/v1/cards": {
+        "post": {
+          "operationId": "CardsController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGalleryDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Card"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          }
+        },
+        "get": {
+          "operationId": "CardsController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/cards/{id}": {
+        "get": {
+          "operationId": "CardsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        },
+        "patch": {
+          "operationId": "CardsController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCardDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        },
+        "delete": {
+          "operationId": "CardsController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
       }
     },
     "info": {
@@ -2936,6 +2964,21 @@ window.onload = function() {
             }
           }
         },
+        "CreateGalleryDto": {
+          "type": "object",
+          "properties": {
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "image_url",
+            "image_id"
+          ]
+        },
         "Gallery": {
           "type": "object",
           "properties": {
@@ -2967,32 +3010,6 @@ window.onload = function() {
           "required": [
             "status_code",
             "message"
-          ]
-        },
-        "CreateGalleryDto": {
-          "type": "object",
-          "properties": {
-            "image_url": {
-              "type": "string"
-            },
-            "image_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "image_url",
-            "image_id"
-          ]
-        },
-        "UploadImageResponse": {
-          "type": "object",
-          "properties": {
-            "imageUrl": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "imageUrl"
           ]
         },
         "ForgotPasswordDto": {
@@ -3646,6 +3663,50 @@ window.onload = function() {
         "UpdateBazaExperienceDto": {
           "type": "object",
           "properties": {}
+        },
+        "Card": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Nae of user"
+            },
+            "specialization": {
+              "type": "string",
+              "description": "Specialization of user"
+            },
+            "image_url": {
+              "type": "string",
+              "description": "Url of the image"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "cloudinary public id of the image"
+            }
+          },
+          "required": [
+            "name",
+            "specialization",
+            "image_url",
+            "image_id"
+          ]
+        },
+        "UpdateCardDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "specialization": {
+              "type": "string"
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          }
         }
       }
     }

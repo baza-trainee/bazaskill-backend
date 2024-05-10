@@ -30,11 +30,11 @@ export class CandidatesController {
   @Post('/upload-cv')
   @UseInterceptors(FileInterceptor('file'))
   async uploadOne(@UploadedFile() file: Express.Multer.File) {
-    const responses = await this.cloudinaryService.uploadFile(
+    const response = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill_cv',
     );
-    return responses;
+    return response;
   }
 
   @Post('/upload-graduate')
