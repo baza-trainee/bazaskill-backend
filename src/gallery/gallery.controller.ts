@@ -5,23 +5,16 @@ import {
   Body,
   Param,
   Delete,
-  Req,
-  Query,
   UseInterceptors,
   UploadedFile,
-  ParseFilePipe,
-  MaxFileSizeValidator,
-  FileTypeValidator,
-  UseGuards,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Gallery } from './entities/gallery.entity';
-import { NotFoundResponse, UploadImageResponse } from '../types';
+import { NotFoundResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Gallery')
 @Controller('gallery')
@@ -31,30 +24,6 @@ export class GalleryController {
     private readonly cloudinaryService: CloudinaryService,
   ) {}
 
-  //get images with pagination
-  @Get('pagination')
-  @ApiResponse({
-    status: 201,
-    description: 'get all images',
-    type: [Gallery],
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  findAllWithPagination(
-    @Req() req,
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 2,
-  ) {
-    return this.galleryService.findAllWithPagination(+page, +limit);
-  }
-
   //create image
   @Post()
   @ApiBody({ type: CreateGalleryDto })
@@ -63,9 +32,21 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
-  create(@Body() createGalleryDto: CreateGalleryDto) {
-    return this.galleryService.create(createGalleryDto);
+  // @UseGuards(JwtAuthGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  async create(
+    @Body() createGalleryDto: CreateGalleryDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const response = await this.cloudinaryService.uploadFile(
+      file,
+      'baza_skill_gallery',
+    );
+    return this.galleryService.create({
+      ...createGalleryDto,
+      image_url: response.url,
+      image_id: response.public_id,
+    });
   }
 
   //get all images
@@ -112,49 +93,8 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.galleryService.remove(+id);
-  }
-
-  //upload image to Cloudinary
-  @Post('upload')
-  @ApiResponse({
-    status: 200,
-    description: 'upload image',
-    type: UploadImageResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('file'))
-  async uploadFile(
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }),
-          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|webp)' }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
-  ): Promise<any> {
-    return await this.cloudinaryService
-      .uploadFile(file, 'images')
-      .then((data) => {
-        return {
-          statusCode: 200,
-          image_url: data.secure_url,
-          image_id: data.public_id,
-        };
-      })
-      .catch((err) => {
-        return {
-          statusCode: 400,
-          message: err.message,
-        };
-      });
   }
 }
