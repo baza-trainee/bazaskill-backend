@@ -32,7 +32,6 @@ export class CardsController {
     status: 500,
     description: 'internal server error',
   })
-  // @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @Body() createCardDto: CreateCardDto,
