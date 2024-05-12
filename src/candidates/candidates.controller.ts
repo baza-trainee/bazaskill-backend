@@ -30,10 +30,13 @@ export class CandidatesController {
   @Post('/upload-cv')
   @UseInterceptors(FileInterceptor('file'))
   async uploadOne(@UploadedFile() file: Express.Multer.File) {
-    const response = await this.cloudinaryService.uploadFile(
-      file,
-      'baza_skill_cv',
-    );
+    let response = {};
+    const ext = file.originalname.split('.');
+    if (ext[ext.length - 1] === 'docx') {
+      response = await this.cloudinaryService.uploadDocx(file, 'baza_skill_cv');
+    } else {
+      response = await this.cloudinaryService.uploadFile(file, 'baza_skill_cv');
+    }
     return response;
   }
 

@@ -26,6 +26,24 @@ export class CloudinaryService {
     }
   }
 
+  async uploadDocx(file: Express.Multer.File, endFolder: string) {
+    try {
+      const result = await cloudinary.uploader.upload(
+        `data:${file.mimetype};base64,${file.buffer.toString('base64')}`,
+        {
+          folder: endFolder,
+          public_id: `${file.originalname}.docx`,
+          resource_type: 'raw',
+          raw_convert: 'aspose',
+        },
+      );
+
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async uploadMultipleFiles(
     files: Express.Multer.File[],
     endFolder: string,
