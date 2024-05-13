@@ -32,7 +32,7 @@ export class CloudinaryService {
         `data:${file.mimetype};base64,${file.buffer.toString('base64')}`,
         {
           folder: endFolder,
-          public_id: `${file.originalname}.docx`,
+          public_id: `${file.originalname}`,
           resource_type: 'raw',
           raw_convert: 'aspose',
         },
