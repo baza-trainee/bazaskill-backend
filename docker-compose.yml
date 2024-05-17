@@ -1,25 +1,27 @@
 version: '3.5'
 
 services:
-  server:
-    build: ./bazaskill-backend
-    container_name: server
-    restart: always
-    ports:
-      - "4000:4000"
-    networks:
-      - bazaskill
-  client:
-    build: ./bazaskill-frontend
-    container_name: client
-    restart: always
-    ports:
-      - "3000:3000"
-    networks:
-      - bazaskill
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
     depends_on:
-      - server
-networks:
-  bazaskill:
-    name: bazaskill
+      - postgres
+    environment:
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE}
+      NODE_ENV: development
+      PORT: 4000
+    ports:
+      - 8080:4000
+    container_name: bazaskill-backend
 
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    container_name: bazaskill-postgres

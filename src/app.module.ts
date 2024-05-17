@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
-import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
@@ -37,19 +35,11 @@ import { CardsModule } from './cards/cards.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: configService.get('DB_PORT'),
-        username: configService.get('DB_USER'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
+        url: configService.get('DATABASE_URL'),
         synchronize: true,
         logging: true,
         entities: [__dirname + '/**/*.entity{.js,.ts}'],
       }),
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'swagger-static'),
-      serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
     }),
     UserModule,
     AuthModule,
