@@ -36,8 +36,8 @@ import { CardsModule } from './cards/cards.module';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         url: configService.get('DATABASE_URL'),
-        synchronize: true,
-        logging: true,
+        synchronize: false,
+        logging: false,
         entities: [__dirname + '/**/*.entity{.js,.ts}'],
       }),
     }),
