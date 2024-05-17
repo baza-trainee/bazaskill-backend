@@ -1,6 +1,6 @@
-FROM node
+FROM node:18
 
-WORKDIR /src/bazaskill_backend
+WORKDIR /src
 
 COPY package*.json ./
 
@@ -10,4 +10,6 @@ COPY . .
 
 RUN npm run build
 
-CMD [ "npm", "run", "start" ]
+EXPOSE 8080
+
+CMD [ "npm", "run", "start:dev" ]
