@@ -8,11 +8,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE}
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:${DB_PORT}/${DB_DATABASE}
       NODE_ENV: development
-      PORT: 4000
+      PORT: ${LOCAL_APP_PORT}
     ports:
-      - 8080:4000
+      - 8080:${LOCAL_APP_PORT}
     volumes:
       - app-data:/app/data
     container_name: bazaskill-backend
@@ -21,7 +21,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - ${DB_PORT}:${LOCAL_DB_PORT}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -29,3 +29,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     container_name: bazaskill-postgres
+
+volumes:
+  app-data:
+  db-data:
