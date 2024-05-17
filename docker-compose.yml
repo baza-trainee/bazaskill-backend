@@ -13,6 +13,8 @@ services:
       PORT: 4000
     ports:
       - 8080:4000
+    volumes:
+      - app-data:/app/data
     container_name: bazaskill-backend
 
   postgres:
@@ -24,4 +26,6 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - db-data:/var/lib/postgresql/data
     container_name: bazaskill-postgres
