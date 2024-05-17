@@ -15,5 +15,7 @@ async function bootstrap() {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
     next();
   });
+
+  await app.listen(process.env.PORT || 4000);
 }
 bootstrap();
