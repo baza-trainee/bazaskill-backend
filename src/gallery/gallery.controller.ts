@@ -7,16 +7,14 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Gallery } from './entities/gallery.entity';
-import { NotFoundResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@ApiTags('Gallery')
 @Controller('gallery')
 export class GalleryController {
   constructor(
@@ -24,15 +22,8 @@ export class GalleryController {
     private readonly cloudinaryService: CloudinaryService,
   ) {}
 
-  //create image
   @Post()
-  @ApiBody({ type: CreateGalleryDto })
-  @ApiResponse({ status: 201, description: 'created', type: Gallery })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @Body() createGalleryDto: CreateGalleryDto,
@@ -49,51 +40,18 @@ export class GalleryController {
     });
   }
 
-  //get all images
   @Get()
-  @ApiResponse({ status: 200, description: 'get all images', type: [Gallery] })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
   findAll() {
     return this.galleryService.findAll();
   }
 
-  //get image by ID
   @Get(':id')
-  @ApiResponse({ status: 200, description: 'get  image by id', type: Gallery })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
   findOne(@Param('id') id: string) {
     return this.galleryService.findOne(+id);
   }
 
-  //delete image
   @Delete(':id')
-  @ApiResponse({ status: 200, description: 'delete image' })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.galleryService.remove(+id);
   }

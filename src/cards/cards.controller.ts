@@ -8,15 +8,14 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { CreateGalleryDto } from 'src/gallery/dto/create-gallery.dto';
-import { Card } from './entities/card.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('cards')
 export class CardsController {
@@ -26,13 +25,8 @@ export class CardsController {
   ) {}
 
   @Post()
-  @ApiBody({ type: CreateGalleryDto })
-  @ApiResponse({ status: 201, description: 'created', type: Card })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createCardDto: CreateCardDto,
     @UploadedFile() file: Express.Multer.File,
@@ -60,6 +54,7 @@ export class CardsController {
 
   @Patch(':id')
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
     @Body() updateCardDto: UpdateCardDto,
@@ -78,6 +73,7 @@ export class CardsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.cardsService.remove(+id);
   }
