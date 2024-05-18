@@ -8,23 +8,15 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
+  UseGuards,
 } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
-import {
-  ApiBody,
-  ApiConsumes,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { NotFoundResponse } from 'src/types';
-import { Document } from './entities/document.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@ApiTags('Documents')
 @Controller('documents')
 export class DocumentsController {
   constructor(
@@ -33,23 +25,7 @@ export class DocumentsController {
   ) {}
 
   @Post()
-  @ApiConsumes('multipart/form-data')
-  @ApiOperation({ summary: 'Upload PDF document' })
-  @ApiBody({
-    description: 'Upload a file',
-    type: 'multipart/form-data',
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-        },
-        title: { type: 'string' },
-      },
-      required: ['file', 'title'],
-    },
-  })
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @UploadedFile() file: Express.Multer.File,
@@ -64,61 +40,17 @@ export class DocumentsController {
   }
 
   @Get()
-  @ApiResponse({
-    status: 200,
-    description: 'get all documents',
-    type: [Document],
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
   findAll() {
     return this.documentsService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({
-    status: 200,
-    description: 'get  document by id',
-    type: Document,
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
   findOne(@Param('id') id: string) {
     return this.documentsService.findOne(+id);
   }
 
   @Patch(':id')
-  @ApiConsumes('multipart/form-data')
-  @ApiOperation({ summary: 'Update PDF document' })
-  @ApiBody({
-    description: 'Upload a file',
-    type: 'multipart/form-data',
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-        },
-        title: { type: 'string' },
-      },
-      required: ['file'],
-    },
-  })
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async update(
     @Param('id') id: string,
@@ -142,6 +74,7 @@ export class DocumentsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
     const res = await this.documentsService.remove(+id);
     await this.cloudinaryService.deleteFile(res.pdf.document_id);

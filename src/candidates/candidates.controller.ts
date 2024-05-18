@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   UseInterceptors,
   UploadedFiles,
@@ -6,9 +5,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  UseGuards,
   UploadedFile,
 } from '@nestjs/common';
 import { CandidatesService } from './candidates.service';
@@ -19,6 +18,7 @@ import {
   FileInterceptor,
 } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('candidates')
 export class CandidatesController {
@@ -29,6 +29,7 @@ export class CandidatesController {
 
   @Post('/upload-cv')
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(JwtAuthGuard)
   async uploadOne(@UploadedFile() file: Express.Multer.File) {
     let response = {};
     const ext = file.originalname.split('.');
@@ -42,6 +43,7 @@ export class CandidatesController {
 
   @Post('/upload-graduate')
   @UseInterceptors(FileFieldsInterceptor([{ name: 'graduate' }]))
+  @UseGuards(JwtAuthGuard)
   async uploadGraduate(
     @UploadedFiles()
     files: {
@@ -57,6 +59,7 @@ export class CandidatesController {
 
   @Post('/upload-cources')
   @UseInterceptors(FileFieldsInterceptor([{ name: 'cources' }]))
+  @UseGuards(JwtAuthGuard)
   async uploadCources(
     @UploadedFiles()
     files: {
@@ -71,6 +74,7 @@ export class CandidatesController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   async create(@Body() createCandidateDto: CreateCandidateDto) {
     return this.candidatesService.create({
       ...createCandidateDto,
@@ -88,6 +92,7 @@ export class CandidatesController {
   }
 
   @Post(':id')
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateCandidateDto: UpdateCandidateDto,
@@ -96,6 +101,7 @@ export class CandidatesController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.candidatesService.remove(+id);
   }
