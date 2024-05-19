@@ -35,7 +35,7 @@ export class SpecializationService {
   async findAllWithStack() {
     const result = await this.specializtionRepository.find({
       order: {
-        id: 'DESC',
+        id: 'ASC',
       },
       relations: {
         specialization_id: {
