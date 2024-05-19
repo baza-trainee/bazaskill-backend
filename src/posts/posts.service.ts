@@ -34,7 +34,7 @@ export class PostsService {
   async findAll() {
     const posts = await this.postsRepository.find({
       order: {
-        created_at: 'ASC',
+        created_at: 'DESC',
       },
     });
     return posts;
