@@ -37,7 +37,7 @@ export class CardsController {
     );
     return this.cardsService.create({
       ...createCardDto,
-      image_url: response.url,
+      image_url: response.secure_url,
       image_id: response.public_id,
     });
   }
@@ -63,11 +63,16 @@ export class CardsController {
     if (file) {
       const { image_id } = await this.cardsService.findOne(+id);
       await this.cloudinaryService.deleteFile(image_id);
-      const { public_id, url } = await this.cloudinaryService.uploadFile(
+      const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill_gallery',
       );
-      return this.cardsService.update(+id, updateCardDto, public_id, url);
+      return this.cardsService.update(
+        +id,
+        updateCardDto,
+        public_id,
+        secure_url,
+      );
     }
     return this.cardsService.update(+id, updateCardDto);
   }

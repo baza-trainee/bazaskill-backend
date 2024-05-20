@@ -35,7 +35,7 @@ export class GalleryController {
     );
     return this.galleryService.create({
       ...createGalleryDto,
-      image_url: response.url,
+      image_url: response.secure_url,
       image_id: response.public_id,
     });
   }

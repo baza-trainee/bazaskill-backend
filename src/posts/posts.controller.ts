@@ -31,11 +31,11 @@ export class PostsController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createPostDto: CreatePostDto,
   ) {
-    const { public_id, url } = await this.cloudinaryService.uploadFile(
+    const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill',
     );
-    const res = this.postsService.create(public_id, url, createPostDto);
+    const res = this.postsService.create(public_id, secure_url, createPostDto);
     return res;
   }
 
@@ -60,11 +60,16 @@ export class PostsController {
     if (file) {
       const { image_id } = await this.postsService.findOne(+id);
       await this.cloudinaryService.deleteFile(image_id);
-      const { public_id, url } = await this.cloudinaryService.uploadFile(
+      const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill',
       );
-      return this.postsService.update(+id, updatePostDto, public_id, url);
+      return this.postsService.update(
+        +id,
+        updatePostDto,
+        public_id,
+        secure_url,
+      );
     }
     return this.postsService.update(+id, updatePostDto);
   }

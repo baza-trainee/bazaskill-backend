@@ -31,11 +31,15 @@ export class DocumentsController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createDocumentDto: CreateDocumentDto,
   ) {
-    const { public_id, url } = await this.cloudinaryService.uploadFile(
+    const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill_pdf',
     );
-    const res = this.documentsService.create(public_id, url, createDocumentDto);
+    const res = this.documentsService.create(
+      public_id,
+      secure_url,
+      createDocumentDto,
+    );
     return res;
   }
 
@@ -60,7 +64,7 @@ export class DocumentsController {
     if (file) {
       const { document_id } = await this.documentsService.findOne(+id);
       await this.cloudinaryService.deleteFile(document_id);
-      const { public_id, url } = await this.cloudinaryService.uploadFile(
+      const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill_pdf',
       );
@@ -68,7 +72,7 @@ export class DocumentsController {
         +id,
         updateDocumentDto,
         public_id,
-        url,
+        secure_url,
       );
     }
   }

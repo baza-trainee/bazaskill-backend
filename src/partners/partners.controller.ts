@@ -31,11 +31,15 @@ export class PartnersController {
     @UploadedFile() file: Express.Multer.File,
     @Body() createPartnerDto: CreatePartnerDto,
   ) {
-    const { public_id, url } = await this.cloudinaryService.uploadFile(
+    const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill',
     );
-    const res = this.partnersService.create(public_id, url, createPartnerDto);
+    const res = this.partnersService.create(
+      public_id,
+      secure_url,
+      createPartnerDto,
+    );
     return res;
   }
 
@@ -60,11 +64,16 @@ export class PartnersController {
     if (file) {
       const { public_cloudinary_id } = await this.partnersService.findOne(id);
       await this.cloudinaryService.deleteFile(public_cloudinary_id);
-      const { public_id, url } = await this.cloudinaryService.uploadFile(
+      const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill',
       );
-      return this.partnersService.update(+id, updatePartnerDto, public_id, url);
+      return this.partnersService.update(
+        +id,
+        updatePartnerDto,
+        public_id,
+        secure_url,
+      );
     }
     return this.partnersService.update(+id, updatePartnerDto);
   }
