@@ -31,13 +31,13 @@ export class TestimonialsController {
     @Body() createTestimonialDto: CreateTestimonialDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const { public_id, url } = await this.cloudinaryService.uploadFile(
+    const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill_pdf',
     );
     return this.testimonialsService.create(
       public_id,
-      url,
+      secure_url,
       createTestimonialDto,
     );
   }
@@ -62,7 +62,7 @@ export class TestimonialsController {
     if (file) {
       const { image_id } = await this.testimonialsService.findOne(+id);
       await this.cloudinaryService.deleteFile(image_id);
-      const { public_id, url } = await this.cloudinaryService.uploadFile(
+      const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill',
       );
@@ -70,7 +70,7 @@ export class TestimonialsController {
         +id,
         updateTestimonialDto,
         public_id,
-        url,
+        secure_url,
       );
     }
     return this.testimonialsService.update(+id, updateTestimonialDto);
