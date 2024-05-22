@@ -29,7 +29,7 @@ export class CandidatesController {
 
   @Post('/upload-cv')
   @UseInterceptors(FileInterceptor('file'))
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   async uploadOne(@UploadedFile() file: Express.Multer.File) {
     let response = {};
     const ext = file.originalname.split('.');
