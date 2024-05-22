@@ -53,6 +53,7 @@ export class TestimonialsController {
   }
 
   @Patch(':id')
+  @UseInterceptors(FileInterceptor('file'))
   @UseGuards(JwtAuthGuard)
   async update(
     @Param('id') id: string,
