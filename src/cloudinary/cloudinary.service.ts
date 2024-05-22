@@ -4,16 +4,30 @@ import { v2 as cloudinary } from 'cloudinary';
 import { CloudinaryResponse } from './cloudinary-response';
 const streamifier = require('streamifier');
 
+function fixCyrillicEncoding(str: string) {
+  // Create a buffer from the string with wrong encoding
+  const bytes = new Uint8Array([...str].map((c) => c.charCodeAt(0)));
+  // Decode using TextDecoder assuming the input was incorrectly encoded as ISO-8859-1
+  const decodedStr = new TextDecoder('utf-8').decode(bytes);
+  return decodedStr;
+}
+
 @Injectable()
 export class CloudinaryService {
   uploadFile(
     file: Express.Multer.File,
     endFolder: string,
   ): Promise<CloudinaryResponse> {
+    console.log(file);
     try {
       return new Promise<CloudinaryResponse>((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
-          { folder: endFolder },
+          {
+            folder: endFolder,
+            use_filename: true,
+            unique_filename: false,
+            filename_override: fixCyrillicEncoding(file.originalname),
+          },
           (error, result) => {
             if (error) return reject(error);
             resolve(result);
