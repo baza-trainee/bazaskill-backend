@@ -66,7 +66,6 @@ export class Candidate {
   @Column()
   sallary_to: string;
 
-  // //need to implement manyToOne with entity specialization
   @ManyToOne(() => Specialization)
   @JoinColumn()
   specialization: Specialization;
@@ -77,19 +76,15 @@ export class Candidate {
   @Column()
   cv_id: string;
 
-  //need to implement oneToMany with entity candidate_stack
   @OneToMany(() => CandidateStack, (stack) => stack.candidate_id)
   stack: CandidateStack[];
 
-  // //need to implement oneToMany with entity candidate_graduate and entity graduate
   @OneToMany(() => CandidateGraduate, (graduate) => graduate.candidate_id)
   gradaute: CandidateGraduate[];
 
-  // //need to implement oneToMany with entity candidate_cources and entity cources
   @OneToMany(() => CandidateCource, (course) => course.candidate_id)
   cources: CandidateCource[];
 
-  // // //need to implement oneToMany with entity candidate_baza_experience and entity baza_experience
   @OneToMany(
     () => BazaExperience,
     (baza_experience) => baza_experience.candidate_id,
@@ -100,7 +95,7 @@ export class Candidate {
   baza_recomendation: string;
 
   @Column()
-  status: string; //working, searching, inactive
+  status: string;
 
   @Column()
   uniqueId: string;

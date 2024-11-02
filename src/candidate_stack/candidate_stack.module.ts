@@ -8,6 +8,5 @@ import { CandidateStack } from './entities/candidate_stack.entity';
   imports: [TypeOrmModule.forFeature([CandidateStack])],
   controllers: [CandidateStackController],
   providers: [CandidateStackService],
-})  
-export class CandidateStackModule {} 
- 
+})
+export class CandidateStackModule {}

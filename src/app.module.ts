@@ -26,6 +26,7 @@ import { CandidateGraduateModule } from './candidate_graduate/candidate_graduate
 import { CandidateCourcesModule } from './candidate_cources/candidate_cources.module';
 import { BazaExperienceModule } from './baza_experience/baza_experience.module';
 import { CardsModule } from './cards/cards.module';
+import { StoriesModule } from './stories/stories.module';
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { CardsModule } from './cards/cards.module';
         // username: configService.get('DB_USER'),
         // password: configService.get('DB_PASSWORD'),
         // database: configService.get('DB_NAME'),
-        synchronize: false,
+        synchronize: true,
         logging: false,
         url: configService.get('DATABASE_URL'),
         entities: [__dirname + '/**/*.entity{.js,.ts}'],
@@ -69,6 +70,7 @@ import { CardsModule } from './cards/cards.module';
     CandidateCourcesModule,
     BazaExperienceModule,
     CardsModule,
+    StoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

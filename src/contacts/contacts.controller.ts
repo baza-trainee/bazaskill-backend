@@ -11,16 +11,13 @@ import {
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
-import { ApiTags, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@ApiTags('Contacts')
 @Controller('contacts')
 export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
   @Post()
-  @ApiBody({ type: CreateContactDto })
   @UseGuards(JwtAuthGuard)
   create(@Body() createContactDto: CreateContactDto) {
     return this.contactsService.create(createContactDto);
@@ -37,7 +34,6 @@ export class ContactsController {
   }
 
   @Patch(':id')
-  @ApiBody({ type: UpdateContactDto })
   @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateContactDto: UpdateContactDto) {
     return this.contactsService.update(+id, updateContactDto);

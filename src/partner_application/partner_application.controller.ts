@@ -10,9 +10,7 @@ import {
 import { PartnerApplicationService } from './partner_application.service';
 import { CreatePartnerApplicationDto } from './dto/create-partner_application.dto';
 import { UpdatePartnerApplicationDto } from './dto/update-partner_application.dto';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Partner Application')
 @Controller('partner-application')
 export class PartnerApplicationController {
   constructor(
@@ -20,7 +18,6 @@ export class PartnerApplicationController {
   ) {}
 
   @Post()
-  @ApiBody({ type: CreatePartnerApplicationDto })
   create(@Body() createPartnerApplicationDto: CreatePartnerApplicationDto) {
     return this.partnerApplicationService.create(createPartnerApplicationDto);
   }
@@ -36,7 +33,6 @@ export class PartnerApplicationController {
   }
 
   @Patch(':id')
-  @ApiBody({ type: UpdatePartnerApplicationDto })
   update(
     @Param('id') id: string,
     @Body() updatePartnerApplicationDto: UpdatePartnerApplicationDto,
