@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/mapped-types';
 import { CreateHrApplicationDto } from './create-hr_application.dto';
 
-export class UpdateHrApplicationDto extends PartialType(CreateHrApplicationDto) {}
+export class UpdateHrApplicationDto extends PartialType(
+  CreateHrApplicationDto,
+) {}

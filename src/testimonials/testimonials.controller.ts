@@ -33,7 +33,7 @@ export class TestimonialsController {
   ) {
     const { public_id, secure_url } = await this.cloudinaryService.uploadFile(
       file,
-      'baza_skill_pdf',
+      'baza_skill',
     );
     return this.testimonialsService.create(
       public_id,
