@@ -20,7 +20,7 @@ export class CreateStoryDto {
   text_pl: string;
 
   @IsString()
-  status: string;
+  role: string;
 
   @IsString()
   speciality: string;
