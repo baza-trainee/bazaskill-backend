@@ -11,16 +11,28 @@ export class StoryEntity {
   id: number;
 
   @Column()
-  name: string;
+  name_ua: string;
+
+  @Column()
+  name_en: string;
+
+  @Column()
+  name_pl: string;
+
+  @Column()
+  text_ua: string;
+
+  @Column()
+  text_en: string;
+
+  @Column()
+  text_pl: string;
 
   @Column()
   status: string;
 
   @Column()
   speciality: string;
-
-  @Column()
-  text: string;
 
   @Column()
   image_url: string;
