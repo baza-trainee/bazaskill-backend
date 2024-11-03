@@ -29,7 +29,7 @@ export class StoryEntity {
   text_pl: string;
 
   @Column()
-  status: string;
+  role: string;
 
   @Column()
   speciality: string;
