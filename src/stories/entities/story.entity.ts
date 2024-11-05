@@ -29,9 +29,6 @@ export class StoryEntity {
   text_pl: string;
 
   @Column()
-  role: string;
-
-  @Column()
   speciality: string;
 
   @Column()
@@ -39,6 +36,9 @@ export class StoryEntity {
 
   @Column()
   image_id: string;
+
+  @Column()
+  date: string;
 
   @CreateDateColumn({
     type: 'timestamp',
